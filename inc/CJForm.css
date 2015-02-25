@@ -1,0 +1,57 @@
+.CJH{
+  text-align: center;
+}
+
+h2.CJH{
+  font-size: 1.2em;
+}
+
+.CJP {
+	text-align:justify;
+	}
+	
+.CJTable{
+	width:800px;
+  font-size: 1.0em;
+}
+
+.CJTable td{
+	text-align:left;
+	padding : 0 10px 10px 10px;
+}
+	
+.CJTable td:first-child{
+	width:300px;
+}
+
+td.CJTdButtons{
+  text-align:center;
+}
+	
+td.CJTdButtons input{
+  margin: 30px 15px;
+  width:100px;
+}
+	
+.CJHr{
+	margin: 30px 0 10px 0;
+	color:#014890;
+	width:100%;
+	}
+
+.CJCheckboxesDiv{
+  display: inline-block;
+  width:220px;
+}
+
+.CJCheckboxesSelectNb{
+  display: inline-block;
+  width:276px;
+}
+
+.CJCheckboxesSelectNb select{
+  width:205px;
+}
+
+
+

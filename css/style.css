@@ -1,0 +1,88 @@
+/* General style */
+body {
+  width: 800px;
+	font-family: garamond;
+  font-size:10.5pt;
+  margin: auto;
+	}
+}
+
+
+/* Header */
+header{
+}
+
+#logo{
+  display:block;
+  position: absolute;
+  top: 18px;
+  margin-left:10px;
+}
+
+#title {
+  display:block;
+  position: absolute;
+  top: 20px;
+  width: 740px;
+  text-align:right;
+	color:#014890;
+  font-size: 1.4em;  
+	}
+
+#flag {
+  display:block;
+  position: absolute;
+  top: 24px;
+  width: 790px;
+  text-align:right;
+	}
+
+
+/* Section */
+section{
+  display:block;
+  position: absolute;
+  top: 50px;
+}
+
+input[type=text],textarea,select {
+	width:500px;
+	font-family: times;
+	font-size:11pt;
+	}
+	
+	
+	
+
+tr {
+	vertical-align:top;
+	}
+
+.marge1 {
+	margin-left:30px;
+	}
+
+.result {
+	font-weight:bold;
+	color:#000;
+	}
+
+	
+@media print {
+	body {
+		margin: 10px 10px 0px 10px;
+		font-family: times;
+		font-size:11pt;
+		}
+	h1 {
+		font-size:16pt;
+		}
+
+	h2 {
+		font-size:12pt;
+		}
+
+	.noprint {
+		display:none;
+		}
+	}
