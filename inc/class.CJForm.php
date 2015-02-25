@@ -297,11 +297,14 @@ class CJForm{
 
   public function newSection(){
     $this->sectionNumber++;
+    echo "<article id='CJArticle_{$this->sectionNumber}' class='CJArticle' >\n";
     echo "<table class='CJTable' id='CJTable_{$this->sectionNumber}'>\n";
   }
 
   public function endSection(){
+    $this->hr();
     echo "</table> <!--CJTable -->\n";
+    echo "</arcticle> <!--CJArticle -->\n";
   }
 
   public function endForm(){

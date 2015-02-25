@@ -8,6 +8,7 @@ h2.CJH{
 
 .CJP {
 	text-align:justify;
+  margin: 10px 0 0 0;
 	}
 	
 .CJTable{
@@ -34,7 +35,7 @@ td.CJTdButtons input{
 }
 	
 .CJHr{
-	margin: 30px 0 10px 0;
+	margin: 20px 0 10px 0;
 	color:#014890;
 	width:100%;
 	}

@@ -4,24 +4,30 @@ body {
 	font-family: garamond;
   font-size:10.5pt;
   margin: auto;
-	}
 }
 
 
 /* Header */
-header{
+header {
+  display:block;
+  position: fixed;
+  top: 0;
+  height: 82px;
+  width:100%;
+  background: #FFF;
+  z-index: 10;
 }
 
 #logo{
   display:block;
-  position: absolute;
+  position: fixed;
   top: 18px;
   margin-left:10px;
 }
 
 #title {
   display:block;
-  position: absolute;
+  position: fixed;
   top: 20px;
   width: 740px;
   text-align:right;
@@ -31,18 +37,25 @@ header{
 
 #flag {
   display:block;
-  position: absolute;
+  position: fixed;
   top: 24px;
   width: 790px;
   text-align:right;
 	}
 
+header hr{
+  position: absolute;
+  top : 80px;	
+  margin: 0 12px;
+	color:#014890;
+	width:776px;
+}
 
 /* Section */
 section{
   display:block;
   position: absolute;
-  top: 50px;
+  top: 90px;
 }
 
 input[type=text],textarea,select {
