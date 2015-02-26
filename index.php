@@ -1,17 +1,18 @@
 <?php
 include "header.php";
 
-echo "<section>\n";
-
 $f=new CJForm();
 $f->setLanguage($_SESSION['lang']);
-
+$f->nav=true;
 $f->newSection();
+
+$f->newArticle("intro");
+$f->h("intro");
 $f->p("intro1");
-$f->endSection();
-//$f->hr();
+$f->buttons("startForm-next");
+$f->endArticle();
 
-$f->newSection();
+$f->newArticle("project-nav");
 $f->h("project");
 $f->inputText("CUGlobalCenter",true);
 $f->inputText("school",true);
@@ -20,19 +21,19 @@ $f->inputText("programProject",true);
 $f->inputText("costEstimate",true);
 $f->inputDates("beginningDate",true);
 $f->inputDates("endingDate",true);
-$f->endSection();
+$f->buttons("previous-previous,next-next");
+$f->endArticle();
 
-//$f->hr();
-$f->newSection();
+$f->newArticle("organizer-nav");
 $f->h("organizer");
 $f->inputText("organizer",true);
 $f->inputText("firstname",true);
 $f->inputText("lastname",true);
 $f->inputText("courriel",true);
-$f->endSection();
+$f->buttons("previous-previous,next-next");
+$f->endArticle();
 
-//$f->hr();
-$f->newSection();
+$f->newArticle("nature-nav");
 $f->h("nature");
 $f->select("roomReserved","grandeSalle,salleConference,autre_precisez",true);
 
@@ -47,32 +48,44 @@ $f->checkboxes("public",array(array("professeurs","etudiants","professionnels","
 
 $f->select("intervenants","[0-20-1]",true);
 $f->select("personnes","[1-120-10]",true);
-$f->endSection();
+$f->buttons("previous-previous,next-next");
+$f->endArticle();
 
-//$f->hr();
-$f->newSection();
+$f->newArticle("salle_equipements-nav");
 $f->h("salle_equipements");
 $f->select("disposition","chaises,tables,cocktail",true);
 $f->checkboxes("equipement","micros_avec_fils[1-6-1],micros_sans_fils[1-2-1],videoprojecteur,dvd,tableau_blanc,paper_board,autre_precisez");
-$f->endSection();
+$f->buttons("previous-previous,next-next");
+$f->endArticle();
 
-//$f->hr();
-$f->newSection();
+$f->newArticle("commentaires");
 $f->h("commentaires");
 $f->textarea("commentaires");
+$f->buttons("previous-previous,endForm-next");
+$f->endArticle();
 
-$f->buttons();
+$f->newArticle();
+$f->h("thanks");
+$f->p("thanks1");
+$f->endArticle();
 
 $f->endSection();
 $f->endForm();
+$f->show();
 ?>
+
+<footer>
+<hr class='CJHr'/>
+<?php echo "* {$lang['obligatoire']}\n"; ?>
+</footer>
+
+
+</body>
+</html>	
 <!-- 
 <br/>
-<?php echo "* {$lang['obligatoire']}\n"; ?>
+
 <br/>
 <br/>
 <?php echo "<input type='submit' value='{$lang['valider']}' name='valider' />\n"; ?>
 -->
-</section>
-</body>
-</html>	

@@ -3,12 +3,15 @@
 class CJForm{
 
 	public $action=null;
-  public $formNumber=0;
+    public $elem=array();
+	public $formNumber=0;
 	public $lang=array();
 	public $langCode="en";
 	public $method="post";
+	public $nav=false;
+	public $navTable=array();
 	public $onSubmit=null;
-  public $sectionNumber=0;
+    public $sectionNumber=0;
 	
   public function CJForm(){
     $this->formNumber++;
@@ -16,8 +19,8 @@ class CJForm{
     if($this->onSubmit){
       $form.="onsubmit='{$this->onSubmit}' ";
     }
-    $form.=">\n";
-    echo $form;
+    $form.=">";
+    $this->elem[]=$form;
   }
 
 	public function setLanguage($lang){
@@ -32,8 +35,8 @@ class CJForm{
 		$star=$required?"&nbsp;<sup>*</sup>":null;
 		$classRequired=$required?"required":null;
 		
-		echo "<tr><td><label for='$id'>$strong1{$this->lang[$id]}$star$strong2</label></td>\n";
-		echo "<td><input type='text' name='$id' id='$id' class='$classRequired' /></td></tr>\n";
+		$this->elem[]="<tr><td><label for='$id'>$strong1{$this->lang[$id]}$star$strong2</label></td>";
+		$this->elem[]="<td><input type='text' name='$id' id='$id' class='$classRequired' /></td></tr>";
 	}
 	
 	public function textarea($id,$required=false){
@@ -42,8 +45,8 @@ class CJForm{
 		$star=$required?"&nbsp;<sup>*</sup>":null;
 		$classRequired=$required?"required":null;
 		
-		echo "<tr><td><label for='$id'>$strong1{$this->lang[$id]}$star$strong2</label></td>\n";
-		echo "<td><textarea name='$id' id='$id' class='$classRequired'></textarea></td></tr>\n";
+		$this->elem[]="<tr><td><label for='$id'>$strong1{$this->lang[$id]}$star$strong2</label></td>";
+		$this->elem[]="<td><textarea name='$id' id='$id' class='$classRequired'></textarea></td></tr>";
 	}
 
 	public function inputDates($id,$required=false,$hours=false,$multiple=false){
@@ -52,48 +55,48 @@ class CJForm{
 		$star=$required?"&nbsp;<sup>*</sup>":null;
 		$classRequired=$required?"required":null;
 		
-		echo "<tr><td><label for='{$id}_date_0'>$strong1{$this->lang[$id]}$star$strong2</label></td>\n";
-		echo "<td><input type='text' name='{$id}_date[]' id='{$id}_date_0' class='CJDatePicker $classRequired'/>\n";
+		$this->elem[]="<tr><td><label for='{$id}_date_0'>$strong1{$this->lang[$id]}$star$strong2</label></td>";
+		$this->elem[]="<td><input type='text' name='{$id}_date[]' id='{$id}_date_0' class='CJDatePicker $classRequired'/>";
 		
 		if($hours){
-			echo "&nbsp;{$this->lang['heure1']}&nbsp;\n";
-			echo "<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='$classRequired' >\n";
-			echo "<option value=''>&nbsp;</option>";
+			$this->elem[]="&nbsp;{$this->lang['heure1']}&nbsp;";
+			$this->elem[]="<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='$classRequired' >";
+			$this->elem[]="<option value=''>&nbsp;</option>";
 			if($this->langCode=="en"){
 				for($i=8;$i<13;$i++){
-					echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>\n";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>";
 				}
 				for($i=13;$i<22;$i++){
-					echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>\n";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>";
 				}
 			}else{
 				for($i=8;$i<22;$i++){
-					echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>\n";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>";
 				}
 			}
-			echo "</select>\n";
-			echo "&nbsp;{$this->lang['heure2']}&nbsp;\n";
-			echo "<select name='{$id}_fin[]' id='{$id}_fin_0' class='$classRequired' >\n";
-			echo "<option value=''>&nbsp;</option>\n";
+			$this->elem[]="</select>";
+			$this->elem[]="&nbsp;{$this->lang['heure2']}&nbsp;";
+			$this->elem[]="<select name='{$id}_fin[]' id='{$id}_fin_0' class='$classRequired' >";
+			$this->elem[]="<option value=''>&nbsp;</option>";
 			if($this->langCode=="en"){
 				for($i=8;$i<13;$i++){
-					echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>\n";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>";
 				}
 				for($i=13;$i<22;$i++){
-					echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>\n";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>";
 				}
 			}else{
 				for($i=8;$i<22;$i++){
-					echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>\n";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>";
 				}
 			}
-			echo "</select>\n";
+			$this->elem[]="</select>";
 		}
 		
 		if($multiple){
-			echo "<img src='../img/add.gif' class='CJFormAddDate' style='cursor:pointer;' alt='{$this->lang['ajouter']}' />\n";
+			$this->elem[]="<img src='../img/add.gif' class='CJFormAddDate' style='cursor:pointer;' alt='{$this->lang['ajouter']}' />";
 		}
-		echo "</td></tr>\n";
+		$this->elem[]="</td></tr>";
 	}
 
 	public function selectHours($id,$required=false,$multiple=false){
@@ -102,62 +105,62 @@ class CJForm{
 		$star=$required?"&nbsp;<sup>*</sup>":null;
 		$classRequired=$required?"required":null;
 		
-		echo "<tr><td><label for='{$id}_hours_0'>$strong1{$this->lang[$id]}$star$strong2</label></td>\n";
-		echo "<td>";
+		$this->elem[]="<tr><td><label for='{$id}_hours_0'>$strong1{$this->lang[$id]}$star$strong2</label></td>";
+		$this->elem[]="<td>";
 		
-		echo "{$this->lang['heure1']}&nbsp;\n";
-		echo "<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='$classRequired' style='width:150px;'>\n";
-		echo "<option value=''>&nbsp;</option>";
+		$this->elem[]="{$this->lang['heure1']}&nbsp;";
+		$this->elem[]="<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='$classRequired' style='width:150px;'>";
+		$this->elem[]="<option value=''>&nbsp;</option>";
 		if($this->langCode=="en"){
 			for($i=8;$i<13;$i++){
-				echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>\n";
+				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>";
 			}
 			for($i=13;$i<22;$i++){
-				echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>\n";
+				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>";
 			}
 		}else{
 			for($i=8;$i<22;$i++){
-				echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>\n";
+				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>";
 			}
 		}
-		echo "</select>\n";
-		echo "&nbsp;{$this->lang['heure2']}&nbsp;\n";
-		echo "<select name='{$id}_fin[]' id='{$id}_fin_0' class='$classRequired' style='width:150px;' >\n";
-		echo "<option value=''>&nbsp;</option>\n";
+		$this->elem[]="</select>";
+		$this->elem[]="&nbsp;{$this->lang['heure2']}&nbsp;";
+		$this->elem[]="<select name='{$id}_fin[]' id='{$id}_fin_0' class='$classRequired' style='width:150px;' >";
+		$this->elem[]="<option value=''>&nbsp;</option>";
 		if($this->langCode=="en"){
 			for($i=8;$i<13;$i++){
-				echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>\n";
+				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00 AM</option>";
 			}
 			for($i=13;$i<22;$i++){
-				echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>\n";
+				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i-12).":00 PM</option>";
 			}
 		}else{
 			for($i=8;$i<22;$i++){
-				echo "<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>\n";
+				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>";
 			}
 		}
-		echo "</select>\n";
+		$this->elem[]="</select>";
 		
 		if($multiple){
-			echo "<img src='../img/add.gif' class='CJFormAddHours' style='cursor:pointer;' alt='{$this->lang['ajouter']}' />\n";
+			$this->elem[]="<img src='../img/add.gif' class='CJFormAddHours' style='cursor:pointer;' alt='{$this->lang['ajouter']}' />";
 		}
-		echo "</td></tr>\n";
+		$this->elem[]="</td></tr>";
 	}
 	
 	public function br(){
-		echo "<tr><td colspan='2'><br/></td></tr>\n";
+		$this->elem[]="<tr><td colspan='2'><br/></td></tr>";
 	}
 
 	public function hr(){
-		echo "<tr><td colspan='2'><hr class='CJHr'/></td></tr>\n";
+		$this->elem[]="<tr><td colspan='2'><hr class='CJHr'/></td></tr>";
 	}
 	
 	public function h($id,$level=2){
-		echo "<tr><td colspan='2'><h$level class='CJH'>{$this->lang[$id]}</h$level></td></tr>\n";
+		$this->elem[]="<tr><td colspan='2'><h$level class='CJH'>{$this->lang[$id]}</h$level></td></tr>";
 	}
 	
 	public function p($id){
-		echo "<tr><td colspan='2'><p class='CJP'>{$this->lang[$id]}</p></td></tr>\n";
+		$this->elem[]="<tr><td colspan='2'><p class='CJP'>{$this->lang[$id]}</p></td></tr>";
 	}
 	
 	public function select($id,$options,$required=false){
@@ -183,17 +186,17 @@ class CJForm{
 			$options=explode(",",$options);
 		}
 		
-		echo "<tr><td><label for='$id'>$strong1{$lang[$id]}$star$strong2</label></td>\n";
-		echo "<td><select name='$id' id='$id'>\n";
-		echo "<option value=''>&nbsp;</option>\n";
+		$this->elem[]="<tr><td><label for='$id'>$strong1{$lang[$id]}$star$strong2</label></td>";
+		$this->elem[]="<td><select name='$id' id='$id'>";
+		$this->elem[]="<option value=''>&nbsp;</option>";
 		foreach($options as $option){
       $option2=array_key_exists($option,$lang)?$lang[$option]:$option;
-			echo "<option value='$option'>$option2</option>\n";
+			$this->elem[]="<option value='$option'>$option2</option>";
 		}
-		echo "</select></td></tr>\n";
+		$this->elem[]="</select></td></tr>";
 		
-		echo "<tr id='tr_other_{$id}' style='display:none;'><td><label for='other_{$id}'>$strong1{$this->lang['autre']}$star$strong2</label></td>\n";
-		echo "<td><input type='text' name='other_{$id}' id='other_{$id}' class='$classRequired' /></td></tr>\n";
+		$this->elem[]="<tr id='tr_other_{$id}' style='display:none;'><td><label for='other_{$id}'>$strong1{$this->lang['autre']}$star$strong2</label></td>";
+		$this->elem[]="<td><input type='text' name='other_{$id}' id='other_{$id}' class='$classRequired' /></td></tr>";
 	}
 	
 	public function radio($id,$options,$required=false,$colspan=1){
@@ -207,20 +210,20 @@ class CJForm{
 			$options=explode(",",$options);
 		}
 		
-		echo "<tr><td colspan='$colspan'>$strong1{$lang[$id]}$star$strong2</td>\n";
+		$this->elem[]="<tr><td colspan='$colspan'>$strong1{$lang[$id]}$star$strong2</td>";
 		if($colspan>1){
-			echo "</tr><tr><td>&nbsp;</td>\n";
+			$this->elem[]="</tr><tr><td>&nbsp;</td>";
 		}
-		echo "<td>\n";
+		$this->elem[]="<td>";
 		
 		$i=0;
 		foreach($options as $option){
-			echo "<input type='radio' id='{$id}_$i' name='{$id}' value='$option' class='$classRequired' />\n";
-			echo "<label for='{$id}_$i'>{$lang[$option]}</label>\n";
+			$this->elem[]="<input type='radio' id='{$id}_$i' name='{$id}' value='$option' class='$classRequired' />";
+			$this->elem[]="<label for='{$id}_$i'>{$lang[$option]}</label>";
 			$i++;
 		}
 		
-		echo "</td></tr>\n";
+		$this->elem[]="</td></tr>";
 	}
 	
 	public function checkboxes($id,$options,$required=false,$colpsan=1){
@@ -240,16 +243,16 @@ class CJForm{
     
 		
 		if(is_array($options[0])){
-			echo "<tr><td colspan='$colpsan'>$strong1{$lang[$id]}$star$strong2</td>\n";
+			$this->elem[]="<tr><td colspan='$colpsan'>$strong1{$lang[$id]}$star$strong2</td>";
 			if($colpsan>1){
-				echo "</tr><tr><td>&nbsp;</td>\n";
+				$this->elem[]="</tr><tr><td>&nbsp;</td>";
 			}
-			echo "<td>\n";
+			$this->elem[]="<td>";
 		
 			$i=0;
       $class=count($options)>1?"class='CJCheckboxesDiv'":null;
 			foreach($options as $options2){
-        echo "<div $class>\n";
+        $this->elem[]="<div $class>";
 				foreach($options2 as $option){
           $select=null;
           if($pos=strpos($option,"[")){
@@ -265,59 +268,108 @@ class CJForm{
             }
           }
 	
-  				echo "<br/>\n";
+  				$this->elem[]="<br/>";
           if($select){
-            echo "<div class='CJCheckboxesDiv'>\n";
+            $this->elem[]="<div class='CJCheckboxesDiv'>";
           }
-          echo "<input type='checkbox' id='{$id}_$i' name='{$id}[]' value='$option' class='$classRequired' />\n";
-					echo "<label for='{$id}_$i'>{$lang[$option]}$select_options</label>\n";
+          $this->elem[]="<input type='checkbox' id='{$id}_$i' name='{$id}[]' value='$option' class='$classRequired' />";
+					$this->elem[]="<label for='{$id}_$i'>{$lang[$option]}$select_options</label>";
           if($select){
-            echo "</div> <!-- class=CJCheckboxesDiv -->\n";
-            echo "<div class='CJCheckboxesSelectNb'>\n";
-            echo $lang['nombre'];
-            echo "<select name='{$id}_{$option}_nb' id='{$id}_{$option}_nb'>\n";
-            echo "<option value=''>&nbsp;</option>\n";
+            $this->elem[]="</div> <!-- class=CJCheckboxesDiv -->";
+            $this->elem[]="<div class='CJCheckboxesSelectNb'>";
+            $this->elem[]=$lang['nombre'];
+            $this->elem[]="<select name='{$id}_{$option}_nb' id='{$id}_{$option}_nb' data-id='{$id}_$i' class='CJCheckboxesSelect'>";
+            $this->elem[]="<option value=''>&nbsp;</option>";
             foreach($select as $elem){
-              echo "<option value='$elem'>$elem</option>\n";
+              $this->elem[]="<option value='$elem'>$elem</option>";
             }
-            echo "</select>\n";
-            echo "</div> <!-- class=CJCheckboxesSelectnb -->\n";
+            $this->elem[]="</select>";
+            $this->elem[]="</div> <!-- class=CJCheckboxesSelectnb -->";
           }
 					$i++;
 				}
-				echo "</div> <!-- class=CJCheckboxesDiv -->\n";		// Remplacer par des div inline-block
+				$this->elem[]="</div> <!-- class=CJCheckboxesDiv -->";		// Remplacer par des div inline-block
 			}
 		}
 		
-		echo "</td></tr>\n";
-		echo "<tr id='tr_other_{$id}' style='display:none;'><td><label for='other_{$id}'>$strong1{$this->lang['autre']}$star$strong2</label></td>\n";
-		echo "<td><textarea name='other_{$id}' id='other_{$id}' class='$classRequired'></textarea></td></tr>\n";
+		$this->elem[]="</td></tr>";
+		$this->elem[]="<tr id='tr_other_{$id}' style='display:none;'><td><label for='other_{$id}'>$strong1{$this->lang['autre']}$star$strong2</label></td>";
+		$this->elem[]="<td><textarea name='other_{$id}' id='other_{$id}' class='$classRequired'></textarea></td></tr>";
 	}
 
 
-  public function newSection(){
+  public function newArticle($id=null){
     $this->sectionNumber++;
-    echo "<article id='CJArticle_{$this->sectionNumber}' class='CJArticle' >\n";
-    echo "<table class='CJTable' id='CJTable_{$this->sectionNumber}'>\n";
+    
+  	if($id){
+    	$this->navTable[]=array("id"=>$this->sectionNumber,"text"=>$this->lang[$id]);
+    }
+
+    $display=$this->sectionNumber==1?null:"style='display: none;'";
+    $this->elem[]="<article id='CJArticle_{$this->sectionNumber}' class='CJArticle' data-id='{$this->sectionNumber}' $display>";
+    $this->elem[]="<table class='CJTable' id='CJTable_{$this->sectionNumber}'>";
   }
 
-  public function endSection(){
-    $this->hr();
-    echo "</table> <!--CJTable -->\n";
-    echo "</arcticle> <!--CJArticle -->\n";
+  public function endArticle(){
+    $this->elem[]="</table> <!--CJTable -->";
+    $this->elem[]="</article> <!--CJArticle -->";
   }
 
   public function endForm(){
-    echo "</form> <!--CJForm -->\n";
+    $this->elem[]="</form> <!--CJForm -->";
   }
 
-  public function buttons(){
+	// buttons($ids) : 
+	// $ids (string) = id1-function1,id2-function2 ... 
+	// or $ids (array) = array("id1-function1","id2-function2")
+
+  public function buttons($ids){
     $lang=$this->lang;
-    echo "<tr><td colspan='2' class='CJTdButtons'>\n";
-    echo "<input type='reset' value='{$lang['reset']}' />\n";
-    echo "<input type='submit' value='{$lang['valider']}' />\n";
-    echo "</td></tr>\n";
+    
+    if(!is_array($ids)){
+    	$ids=explode(",",$ids);
+    }
+    $this->elem[]="<tr><td colspan='2' class='CJTdButtons'>";
+	foreach($ids as $id){
+		$id=trim($id);
+		$tmp=explode("-",$id);
+		$id=$tmp[0];
+		$function=$tmp[1];
+		switch($function){
+			case "next" : $class="CJButtonNext"; break;
+			case "previous" : $class="CJButtonPrevious"; break;
+			case "submit" : $class="CJButtonSubmit"; break;
+		}
+		$this->elem[]="<input type='button' id='{$id}_{$this->sectionNumber}' value='{$lang[$id]}' class='CJButton $class' data-sectionId='{$this->sectionNumber}' />";
+	}
+    $this->elem[]="</td></tr>";
   }
+  
+  public function show(){
+  	// Navigation
+  	if($this->nav){
+ 	   echo "<nav class='CJTdNavLinks'><ul>";
+ 	   foreach($this->navTable as $elem){
+ 	   		echo "<li id='CJNavLi_{$elem['id']}' class='CJNavLi'>{$elem['text']}</li>";
+	    }
+	    echo "</ul></nav>";
+	}
+
+	// Reste du formulaire
+  	foreach($this->elem as $elem){
+  		echo $elem;
+  		echo "\n";
+  	}
+  }
+  
+  public function newSection(){
+  	$this->elem[]="<section class='CJSection'>";
+  }
+
+  public function endSection(){
+  	$this->elem[]="</section>";
+  }
+
 }
 
 ?>

@@ -22,14 +22,19 @@ $lang['charge']="On-site program organizer";
 $lang['sponsor']="Name of sponsors (if applicable)";
 $lang['obligatoire']="Fields marked with an asterisk must be filled in.";
 
+$lang['intro']="Introduction";
 $lang['intro1']="We look forward to working with you in preparation for your event.  In addition to reserving conference/classroom space, 
 the Paris Center can work with you to organize hotel reservations, receptions, meals, etc. The Center can also facilitate payments to local 
 vendors (hotels, restaurants, caterers, etc). Administrative fees apply.<br/><br/>
 Once this form is validated, an Expense Authorization form will be 
 automatically generated. Please print it, and email the signed version to <a href='mailto:parisfinance.cgc@columbia.edu'>parisfinance.cgc@columbia.edu</a>, 
 along with a copy of the associated program/project budget.";
+$lang['thanks']="Thank you";
+$lang['thanks1']="Thank you ...";
+
 
 $lang['project']="Project information";
+$lang['project-nav']="Project";
 $lang['CUGlobalCenter']="CU Global Center";
 $lang['school']="School / Institution";
 $lang['programTitle']="Program / Project Title";
@@ -40,6 +45,7 @@ $lang['beginningDate']="Beginning date";
 $lang['endingDate']="Ending Date";
 
 $lang['organizer']="Organizer Information";
+$lang['organizer-nav']="Organizer";
 $lang['firstname']="First Name";
 $lang['lastname']="Last Name";
 
@@ -51,8 +57,10 @@ $lang['timesRequested']="Times requested";
 
 $lang['contact_paris_admin']="If yes, please contact the Paris Center administrative team at <a href='mailto:parisadministration.cgc@columbia.edu'>parisadministration.cgc@columbia.edu</a> to provide details.";
 
-$lang['precedent']="Last";
-$lang['suivant']="Next";
+$lang['startForm']="Start";
+$lang['endForm']="Submit";
+$lang['previous']="Previous";
+$lang['next']="Next";
 $lang['valider']="Submit";
 $lang['reset']="Reset";
 $lang['ajouter']="Add";
@@ -63,6 +71,7 @@ $lang['non']="No";
 $lang['nombre']="Quantity :";
 
 $lang['nature']="Event information";
+$lang['nature-nav']="Event";
 $lang['type']="Type of event";
 $lang['colloque']="Colloquium";
 $lang['conference']="Lecture";
@@ -85,6 +94,7 @@ $lang['intervenants']="Number of speakers";
 $lang['personnes']="Expected attendance";
 
 $lang['salle_equipements']="Room setup and equipment requests";
+$lang['salle_equipements-nav']="Room and equipment";
 $lang['disposition']="Room layout";
 $lang['chaises']="Conference style (rows of chairs)";
 $lang['tables']="Seminar style (tables and chairs)";

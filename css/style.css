@@ -2,7 +2,7 @@
 body {
   width: 800px;
 	font-family: garamond;
-  font-size:10.5pt;
+  font-size:12pt;
   margin: auto;
 }
 
@@ -51,11 +51,13 @@ header hr{
 	width:776px;
 }
 
+
+
+
 /* Section */
 section{
   display:block;
   position: absolute;
-  top: 90px;
 }
 
 input[type=text],textarea,select {
