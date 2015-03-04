@@ -63,21 +63,39 @@ nav.CJTdNavLinks{
 	position : absolute;
 	top: 90px;
 	width:800px;
-	height: 55px;
+	height: 70px;
 	color: #6cace4;
+	font-weight: bold;
 }
 
+.CJNavLi span{
+	padding-top: 4px;
+}
+	
 .CJNavLi.done{
 	color: #012169;
-	font-weight: bold;
 	cursor: pointer;
 }
 
 .CJNavLi.current{
 	color: #012169;
-	font-weight: bold;
+}
+
+.CJNavLi span.CJNavIcon{
+	display: inline-block;
+	width:26px;
+	height: 26px;
+	background: url("images/page-navigator-unlocked.png") no-repeat;
+}
+
+.CJNavLi.current span.CJNavIcon{
+	background: url("images/page-navigator-active.png") no-repeat;
+}
+
+.CJNavLi.current span.CJNavText{
 	text-decoration: underline;
 }
+
 
 .CJTdNavLinks ul{
 	padding: 5px;
@@ -86,7 +104,7 @@ nav.CJTdNavLinks{
 
 .CJTdNavLinks li{
 	display: inline-block;
-	margin: 0 10px;
+	margin: 0 7px;
 }
 
 

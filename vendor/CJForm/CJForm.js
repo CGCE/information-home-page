@@ -1,21 +1,8 @@
 $(function(){
-/*  $(".CJArticle input").focus(function(){
-    var scroll=$(this).closest("article").position().top;
-    $(document).scrollTop(scroll);
-  });
-
-  $(".CJArticle select").focus(function(){
-    var scroll=$(this).closest("article").position().top;
-    $(document).scrollTop(scroll);
-  });
-
-  $(".CJArticle textarea").focus(function(){
-    var scroll=$(this).closest("article").position().top;
-    $(document).scrollTop(scroll);
-  });
-*/
+	// Boutons JQuery-UI
 	$(".CJButton").button();
 	
+	// Clic sur Previous
 	$(".CJButtonPrevious").click(function(){
 		var sectionId=$(this).attr("data-sectionId");
 		var PreviousSectionId=parseInt(sectionId)-1;
@@ -28,6 +15,7 @@ $(function(){
 		});
 	});
 	
+	// Clic sur Next
 	$(".CJButtonNext").click(function(){
 		var sectionId=$(this).attr("data-sectionId");
 		var nextSectionId=parseInt(sectionId)+1;
@@ -35,12 +23,36 @@ $(function(){
 		$(".CJNavLi").removeClass("current");
 		$("#CJNavLi_"+sectionId).addClass("done");
 		$("#CJNavLi_"+nextSectionId).addClass("current");
+		
 		// Article
 		$("#CJArticle_"+sectionId).hide("slide",{direction:"left"},500,function(){
 			$("#CJArticle_"+nextSectionId).show("slide",{direction:"right"},500);
 		});
 	});
 	
+	// Clic sur un item du menu de navigation
+	$(".CJNavLi").click(function(){
+		if($(this).hasClass("done")){
+			var current = $(".CJNavLi.current").attr("data-id");
+			var newId=$(this).attr("data-id");
+			
+			// Navigation
+			$("#CJNavLi_"+current).removeClass("current");	
+			$("#CJNavLi_"+newId).addClass("current");
+		
+			var direction1=current>newId?"right":"left";
+			var direction2=current<newId?"right":"left";
+			
+			// Article
+			$(".CJArticle:visible").hide("slide",{direction:direction1},500,function(){
+				$("#CJArticle_"+newId).show("slide",{direction:direction2},500);
+			});
+		}
+	
+	
+	});
+
+	// Modification d'un select attaché à une checkbox
 	$(".CJCheckboxesSelect").change(function(){
 		var id=$(this).attr("data-id");
 		if($(this).val()){
@@ -49,6 +61,21 @@ $(function(){
 			$("#"+id).prop("checked",false);
 		}
 	});
+	
+	
+	// Modification d'une checkbox ayant un select attaché
+	$(".CJCheckbox").change(function(){
+		var id=$(this).attr("id");
+		
+		if($(this).prop("checked")){
+			$("#"+id+"_nb").val(1);
+		} else {
+			$("#"+id+"_nb").val(0);
+		}
+	});
+	
+	
+
 });
 
 

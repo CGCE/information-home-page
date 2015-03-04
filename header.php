@@ -12,7 +12,7 @@ if(isset($_GET['fr'])){
   $_SESSION['lang']="en";
 }
 	
-include "inc/class.CJForm.php";
+include "vendor/CJForm/CJForm.php";
 
 
 ?>
@@ -25,11 +25,11 @@ echo "<script type='text/JavaScript'>var date_format=\"{$lang['date_format']}\";
 ?>
 <link rel='shortcut icon' type='image/x-icon' href='css/img/favicon.ico' /> 
 <link rel='stylesheet' type='text/css' href= 'vendor/jquery-ui-1.10.4.custom/css/CGC/jquery-ui-1.10.4.custom.min.css' media='all' />
-<link rel='stylesheet' type='text/css' href= 'inc/CJForm.css' media='all' />
+<link rel='stylesheet' type='text/css' href= 'vendor/CJForm/CJForm.css' media='all' />
 <link rel='stylesheet' type='text/css' href= 'css/style.css' media='all' />
 <script type='text/JavaScript' src='vendor/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js'></script>
 <script type='text/JavaScript' src='vendor/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js'></script>
-<script type='text/JavaScript' src='inc/CJForm.js'></script>
+<script type='text/JavaScript' src='vendor/CJForm/CJForm.js'></script>
 <script type='text/JavaScript' src='js/script.js'></script>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 </head>

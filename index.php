@@ -54,7 +54,7 @@ $f->endArticle();
 $f->newArticle("salle_equipements-nav");
 $f->h("salle_equipements");
 $f->select("disposition","chaises,tables,cocktail",true);
-$f->checkboxes("equipement","micros_avec_fils[1-6-1],micros_sans_fils[1-2-1],videoprojecteur,dvd,tableau_blanc,paper_board,autre_precisez");
+$f->checkboxes("equipement","micros_avec_fils[1-4-1],micros_sans_fils[1-2-1],videoprojecteur,dvd,tableau_blanc,paper_board,autre_precisez");
 $f->buttons("previous-previous,next-next");
 $f->endArticle();
 
@@ -72,20 +72,6 @@ $f->endArticle();
 $f->endSection();
 $f->endForm();
 $f->show();
+
+include "footer.php";
 ?>
-
-<footer>
-<hr class='CJHr'/>
-<?php echo "* {$lang['obligatoire']}\n"; ?>
-</footer>
-
-
-</body>
-</html>	
-<!-- 
-<br/>
-
-<br/>
-<br/>
-<?php echo "<input type='submit' value='{$lang['valider']}' name='valider' />\n"; ?>
--->

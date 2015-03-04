@@ -1,3 +1,15 @@
+/* Fonts */
+@font-face {
+   font-family: "Trajan Pro";
+   src: url('fonts/TrajanPro-Regular.ttf');
+}
+
+@font-face {
+   font-family: "Adobe Garamond Pro";
+   src: url('fonts/AGaramondPro-Regular.otf');
+}
+
+
 /* General style */
 body {
   width: 800px;
@@ -6,6 +18,10 @@ body {
   margin: auto;
 }
 
+h2{
+	font-family: "Trajan Pro";
+	color:#014890;
+}
 
 /* Header */
 header {

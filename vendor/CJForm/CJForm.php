@@ -272,13 +272,13 @@ class CJForm{
           if($select){
             $this->elem[]="<div class='CJCheckboxesDiv'>";
           }
-          $this->elem[]="<input type='checkbox' id='{$id}_$i' name='{$id}[]' value='$option' class='$classRequired' />";
+          $this->elem[]="<input type='checkbox' id='{$id}_$i' name='{$id}[]' value='$option' class='CJCheckbox $classRequired' />";
 					$this->elem[]="<label for='{$id}_$i'>{$lang[$option]}$select_options</label>";
           if($select){
             $this->elem[]="</div> <!-- class=CJCheckboxesDiv -->";
             $this->elem[]="<div class='CJCheckboxesSelectNb'>";
             $this->elem[]=$lang['nombre'];
-            $this->elem[]="<select name='{$id}_{$option}_nb' id='{$id}_{$option}_nb' data-id='{$id}_$i' class='CJCheckboxesSelect'>";
+            $this->elem[]="<select name='{$id}_{$option}_nb' id='{$id}_{$i}_nb' data-id='{$id}_$i' class='CJCheckboxesSelect'>";
             $this->elem[]="<option value=''>&nbsp;</option>";
             foreach($select as $elem){
               $this->elem[]="<option value='$elem'>$elem</option>";
@@ -348,11 +348,13 @@ class CJForm{
   public function show(){
   	// Navigation
   	if($this->nav){
- 	   echo "<nav class='CJTdNavLinks'><ul>";
+ 	   echo "<nav class='CJTdNavLinks'><ul>\n";
  	   foreach($this->navTable as $elem){
- 	   		echo "<li id='CJNavLi_{$elem['id']}' class='CJNavLi'>{$elem['text']}</li>";
+ 	   		echo "<li id='CJNavLi_{$elem['id']}' class='CJNavLi' data-id='{$elem['id']}' >\n";
+ 	   		echo "<span class='CJNavIcon' id='CJNavIcon_{$elem['id']}'>{$elem['id']}</span>\n";
+ 	   		echo "<span class='CJNavText' id='CJNavText_{$elem['id']}'>{$elem['text']}</span></li>\n";
 	    }
-	    echo "</ul></nav>";
+	    echo "</ul></nav>\n";
 	}
 
 	// Reste du formulaire
