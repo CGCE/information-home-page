@@ -29,6 +29,7 @@ echo "<script type='text/JavaScript'>var date_format=\"{$lang['date_format']}\";
 <link rel='stylesheet' type='text/css' href= 'css/style.css' media='all' />
 <script type='text/JavaScript' src='vendor/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js'></script>
 <script type='text/JavaScript' src='vendor/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js'></script>
+<?php if($_SESSION['lang']=="fr"){ echo "<script type='text/JavaScript' src='vendor/datePickerFr.js'></script>"; } ?>
 <script type='text/JavaScript' src='vendor/CJForm/CJForm.js'></script>
 <script type='text/JavaScript' src='js/script.js'></script>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />

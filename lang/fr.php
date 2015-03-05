@@ -46,8 +46,8 @@ $lang['costEstimate']="Cost Estimate";
 $lang['beginningDate']="Date de début";
 $lang['endingDate']="Date de fin";
 
-$lang['organizer']="Organizer Information";
-$lang['organizer-nav']="Organizer";
+$lang['organizer']="Informations sur l'organisateur";
+$lang['organizer-nav']="Organisateur";
 $lang['firstname']="Prénom";
 $lang['lastname']="Nom";
 
@@ -96,7 +96,7 @@ $lang['intervenants']="Nombre d'intervenants";
 $lang['personnes']="Nombre de personnes attendues";
 
 $lang['salle_equipements']="Salle et équipements";
-$lang['salle_equipements-nav']="Salle et équipements";
+$lang['salle_equipements-nav']="&Eacute;quipements";
 $lang['disposition']="Disposition de la salle";
 $lang['chaises']="Configuration en conférence (chaises)";
 $lang['tables']="Configuration en séminaire (tables et chaises)";

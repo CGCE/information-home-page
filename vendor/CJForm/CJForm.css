@@ -13,22 +13,22 @@ h2.CJH{
 	
 .CJTable{
 	width:800px;
-  font-size: 1.0em;
+	font-size: 1.0em;
+}
+
+.CJTable tr{
+	vertical-align: top;
 }
 
 .CJTable td{
 	text-align:left;
-	padding : 0 10px 10px 10px;
+	padding : 0 0 10px 10px;
 }
 	
 .CJTable td:first-child{
 	width:300px;
 }
 
-/*.CJButton{
-	position: absolute;	
-}
-*/
 td.CJTdButtons{
   text-align:right;
 }
@@ -44,19 +44,6 @@ td.CJTdButtons input{
 	width:100%;
 	}
 
-.CJCheckboxesDiv{
-  display: inline-block;
-  width:220px;
-}
-
-.CJCheckboxesSelectNb{
-  display: inline-block;
-  width:276px;
-}
-
-.CJCheckboxesSelectNb select{
-  width:205px;
-}
 
 /* Navigation */
 nav.CJTdNavLinks{
@@ -107,6 +94,53 @@ nav.CJTdNavLinks{
 	margin: 0 7px;
 }
 
+/* Champs du formulaires */
+input[type=text].CJField,
+textarea.CJField,
+select.CJField{
+	width:500px;
+	font-family: times;
+	font-size:11pt;
+}
+
+.CJCheckboxesDiv{
+  display: inline-block;
+  width:220px;
+}
+
+.CJCheckboxesSelectNb{
+  display: inline-block;
+  width:276px;
+}
+
+select.CJCheckboxesSelect{
+  width:205px;
+}
+
+textarea.CJField{
+	height: 200px;
+	resize: none;
+}
+
+/* Validation des formulaires */
+input[type=text].CJFieldValidate,
+textarea.CJFieldValidate,
+select.CJFieldValidate{
+	margin-right: 25px;
+	width:475px;
+}
+
+select.CJCheckboxesSelect.CJFieldValidate{
+  width:180px;
+}
+
+.CJFieldError{
+	background: url("images/error.png") no-repeat right top;
+}
+
+.CJFieldOK{
+	background: url("images/check.png") no-repeat right top;
+}
 
 footer{
 	position: absolute;

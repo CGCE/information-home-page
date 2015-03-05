@@ -19,16 +19,129 @@ $(function(){
 	$(".CJButtonNext").click(function(){
 		var sectionId=$(this).attr("data-sectionId");
 		var nextSectionId=parseInt(sectionId)+1;
-		// Navigation
-		$(".CJNavLi").removeClass("current");
-		$("#CJNavLi_"+sectionId).addClass("done");
-		$("#CJNavLi_"+nextSectionId).addClass("current");
 		
-		// Article
-		$("#CJArticle_"+sectionId).hide("slide",{direction:"left"},500,function(){
-			$("#CJArticle_"+nextSectionId).show("slide",{direction:"right"},500);
+		var valid=true;
+		
+		$(".CJField:visible").each(function(){
+			var valid2=true;
+			var mustBeValidate=false;
+
+			// Simple champ required
+			if($(this).hasClass("required")){
+				mustBeValidate=true;
+				if(!$(this).val().trim()){
+					valid=false;
+					valid2=false;
+				}
+			}
+				
+			// Champs "Others" visibles ne doivent jamais être vides
+			if($(this).hasClass("CJOther")){
+				mustBeValidate=true;
+				if(!$(this).val().trim()){
+					valid=false;
+					valid2=false;
+				}
+			}
+			
+			// Champ e-mail
+			if($(this).hasClass("CJMail") && !CJValidMail($(this).val())){
+				mustBeValidate=true;
+				valid=false;					
+				valid2=false;
+			}
+
+			// Champ date EN
+			else if($(this).hasClass("CJDateEN") && !CJValidDateEN($(this).val())){
+				mustBeValidate=true;
+				valid=false;					
+				valid2=false;
+			}
+
+			// Champ date FR
+			else if($(this).hasClass("CJDateFR") && !CJValidDateFR($(this).val())){
+				mustBeValidate=true;
+				valid=false;					
+				valid2=false;
+			}
+			
+			// Champs horaires
+			// Si requis, les 2 champs doivent être remplis
+			// Si non requis, les 2 champs doivent être remplis ou les 2 chams doivent être vides
+			if($(this).hasClass("CJFieldHours")){
+			 	if($(this).val()){
+				 	$(this).closest("td").find("select").each(function(){
+				 		if(!$(this).val()){
+				 			mustBeValidate=true;
+							valid=false;
+							valid2=false;
+						}
+					});
+				} else {
+				 	$(this).closest("td").find("select").each(function(){
+				 		if($(this).val()){
+				 			mustBeValidate=true;
+							valid=false;
+							valid2=false;
+						}
+					});
+				
+				}
+			}
+			
+			// Si ce sont des boutons radio requis
+			// 1 bouton du groupe doit être coché
+			if($(this).attr("type")=="radio" && $(this).hasClass("required")){
+				valid2=false;
+				$(this).closest("td").find("input").each(function(){
+				 	if($(this).prop("checked")){
+				 		
+						valid2=true;
+					}
+				});
+				if(!valid2){
+					valid=false;
+				}
+			}
+				
+			if(mustBeValidate){
+				// .CJFieldValidate : ajoute une marge à droite pour laisser place à l'icône de validation
+				$(this).addClass("CJFieldValidate");
+
+				if(valid2){
+					// Affichage des icônes OK
+					$(this).closest("td").removeClass("CJFieldError");
+					$(this).closest("td").addClass("CJFieldOK");
+				} else {
+					// Affichage des icônes error
+					$(this).closest("td").removeClass("CJFieldOK");
+					$(this).closest("td").addClass("CJFieldError");
+				}
+			}
 		});
+		
+		if(valid){
+			// Navigation
+			$(".CJNavLi").removeClass("current");
+			$("#CJNavLi_"+sectionId).addClass("done");
+			$("#CJNavLi_"+nextSectionId).addClass("current");
+		
+			// Article
+			$("#CJArticle_"+sectionId).hide("slide",{direction:"left"},500,function(){
+				$("#CJArticle_"+nextSectionId).show("slide",{direction:"right"},500);
+			});
+		} else {
+		}
 	});
+	
+	
+	// Suppression des classes .CJField lors des cliques dans les champs
+	$(".CJField").click(function(){
+		$(this).closest("td").removeClass("CJFieldError");
+		$(this).closest("td").removeClass("CJFieldOK");
+		$(this).removeClass("CJFieldValidate");
+	});
+	
 	
 	// Clic sur un item du menu de navigation
 	$(".CJNavLi").click(function(){
@@ -48,8 +161,6 @@ $(function(){
 				$("#CJArticle_"+newId).show("slide",{direction:direction2},500);
 			});
 		}
-	
-	
 	});
 
 	// Modification d'un select attaché à une checkbox
@@ -112,3 +223,17 @@ $(document).ready(function(){
 
 
 });
+
+
+function CJValidMail(string){
+	return string.trim()=="" || string.match(/^[A-Z0-9._%-\+\-]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,4}$/i);
+}
+
+function CJValidDateEN(string){
+	return string.trim()=="" || string.match(/^(0?[1-9]|1[012])[\- \/.](0?[1-9]|[12][0-9]|3[01])[\- \/.](19|20)[0-9]{2}$/);
+}
+
+function CJValidDateFR(string){
+	return string.trim()=="" || string.match(/^(0?[1-9]|[12][0-9]|3[01])[\- \/.](0?[1-9]|1[012])[\- \/.](19|20)[0-9]{2}$/);
+}
+

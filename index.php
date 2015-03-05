@@ -29,7 +29,7 @@ $f->h("organizer");
 $f->inputText("organizer",true);
 $f->inputText("firstname",true);
 $f->inputText("lastname",true);
-$f->inputText("courriel",true);
+$f->inputText("courriel",true,"mail");
 $f->buttons("previous-previous,next-next");
 $f->endArticle();
 

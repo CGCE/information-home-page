@@ -76,15 +76,6 @@ section{
   position: absolute;
 }
 
-input[type=text],textarea,select {
-	width:500px;
-	font-family: times;
-	font-size:11pt;
-	}
-	
-	
-	
-
 tr {
 	vertical-align:top;
 	}
