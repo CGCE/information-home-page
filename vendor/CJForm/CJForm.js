@@ -105,9 +105,6 @@ $(function(){
 			}
 				
 			if(mustBeValidate){
-				// .CJFieldValidate : ajoute une marge à droite pour laisser place à l'icône de validation
-				$(this).addClass("CJFieldValidate");
-
 				if(valid2){
 					// Affichage des icônes OK
 					$(this).closest("td").removeClass("CJFieldError");
@@ -139,7 +136,6 @@ $(function(){
 	$(".CJField").click(function(){
 		$(this).closest("td").removeClass("CJFieldError");
 		$(this).closest("td").removeClass("CJFieldOK");
-		$(this).removeClass("CJFieldValidate");
 	});
 	
 	
