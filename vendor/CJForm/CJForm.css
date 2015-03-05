@@ -67,6 +67,7 @@ nav.CJTdNavLinks{
 
 .CJNavLi.current{
 	color: #012169;
+	cursor: text;
 }
 
 .CJNavLi span.CJNavIcon{
@@ -96,6 +97,7 @@ nav.CJTdNavLinks{
 }
 
 /* Champs du formulaires */
+
 input[type=text].CJField,
 textarea.CJField,
 select.CJField{
@@ -105,18 +107,27 @@ select.CJField{
 	font-size:11pt;
 }
 
+select.CJField{
+	width:448px;
+}
+
+.CJField{
+  margin-left: 0;
+}
+
 .CJCheckboxesDiv{
   display: inline-block;
   width:220px;
 }
 
 .CJCheckboxesSelectNb{
-  display: inline-block;
-  width:276px;
+	position:absolute;
+	right:5px;
+  	display: inline-block;
 }
 
 select.CJCheckboxesSelect{
-  width:180px;
+  width:155px;
 }
 
 textarea.CJField{

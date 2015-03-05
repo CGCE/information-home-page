@@ -20,16 +20,21 @@ $(function(){
 		var sectionId=$(this).attr("data-sectionId");
 		var nextSectionId=parseInt(sectionId)+1;
 		
+		// Variable valid valable pour tous l'article affiché
 		var valid=true;
 		
 		$(".CJField:visible").each(function(){
+			// Variables pour le champ en cours
 			var valid2=true;
 			var mustBeValidate=false;
+
+			// Trim : des valeurs
+			$(this).val($(this).val().trim());
 
 			// Simple champ required
 			if($(this).hasClass("required")){
 				mustBeValidate=true;
-				if(!$(this).val().trim()){
+				if(!$(this).val()){
 					valid=false;
 					valid2=false;
 				}
@@ -38,7 +43,7 @@ $(function(){
 			// Champs "Others" visibles ne doivent jamais être vides
 			if($(this).hasClass("CJOther")){
 				mustBeValidate=true;
-				if(!$(this).val().trim()){
+				if(!$(this).val()){
 					valid=false;
 					valid2=false;
 				}
@@ -141,7 +146,7 @@ $(function(){
 	
 	// Clic sur un item du menu de navigation
 	$(".CJNavLi").click(function(){
-		if($(this).hasClass("done")){
+		if($(this).hasClass("done") && !$(this).hasClass("current")){
 			var current = $(".CJNavLi.current").attr("data-id");
 			var newId=$(this).attr("data-id");
 			

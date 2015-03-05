@@ -68,7 +68,7 @@ class CJForm{
 		$this->elem[]="<td><input type='text' name='{$id}_date[]' id='{$id}_date_0' class='CJField CJDatePicker $classRequired $type'/>";
 		
 		if($hours){
-			$this->elem[]="&nbsp;{$this->lang['heure1']}&nbsp;";
+			$this->elem[]="{$this->lang['heure1']}&nbsp;";
 			$this->elem[]="<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='CJField $classRequired' >";
 			$this->elem[]="<option value=''>&nbsp;</option>";
 			if($this->langCode=="en"){
@@ -117,6 +117,7 @@ class CJForm{
 		$this->elem[]="<tr><td><label for='{$id}_hours_0'>$strong1{$this->lang[$id]}$star$strong2</label></td>";
 		$this->elem[]="<td>";
 		
+		$this->elem[]="<div class='CJCheckboxesDiv'>";
 		$this->elem[]="{$this->lang['heure1']}&nbsp;";
 		$this->elem[]="<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='CJField CJFieldHours $classRequired' style='width:150px;'>";
 		$this->elem[]="<option value=''>&nbsp;</option>";
@@ -132,8 +133,10 @@ class CJForm{
 				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>";
 			}
 		}
-		$this->elem[]="</select>";
-		$this->elem[]="&nbsp;{$this->lang['heure2']}&nbsp;";
+		$this->elem[]="</select></div>";
+		
+		$this->elem[]="<div class='CJCheckboxesDiv'>";
+		$this->elem[]="{$this->lang['heure2']}&nbsp;";
 		$this->elem[]="<select name='{$id}_fin[]' id='{$id}_fin_0' class='CJField CJFieldHours $classRequired' style='width:150px;' >";
 		$this->elem[]="<option value=''>&nbsp;</option>";
 		if($this->langCode=="en"){
@@ -148,7 +151,7 @@ class CJForm{
 				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00'>".sprintf("%02d",$i).":00</option>";
 			}
 		}
-		$this->elem[]="</select>";
+		$this->elem[]="</select></div>";
 		
 		if($multiple){
 			$this->elem[]="<img src='../img/add.gif' class='CJFormAddHours' style='cursor:pointer;' alt='{$this->lang['ajouter']}' />";
@@ -281,7 +284,7 @@ class CJForm{
           if($select){
             $this->elem[]="<div class='CJCheckboxesDiv'>";
           }
-          $this->elem[]="<input type='checkbox' id='{$id}_$i' name='{$id}[]' value='$option' class='CJCheckbox $classRequired' />";
+          $this->elem[]="<input type='checkbox' id='{$id}_$i' name='{$id}[]' value='$option' class='CJField CJCheckbox $classRequired' />";
 					$this->elem[]="<label for='{$id}_$i'>{$lang[$option]}$select_options</label>";
           if($select){
             $this->elem[]="</div> <!-- class=CJCheckboxesDiv -->";
