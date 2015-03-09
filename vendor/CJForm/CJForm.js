@@ -20,16 +20,22 @@ $(function(){
 		var sectionId=$(this).attr("data-sectionId");
 		var nextSectionId=parseInt(sectionId)+1;
 		
-		// Variable valid valable pour tous l'article affiché
+		// Variable submit = true si des champs sont visibles et si un enregistrement dans la BDD doit avoir lieu
+		var submit=false;
+		// Variable valid valable pour tout l'article affiché
 		var valid=true;
 		
 		$(".CJField:visible").each(function(){
+			submit=true;
+			
 			// Variables pour le champ en cours
 			var valid2=true;
 			var mustBeValidate=false;
 
-			// Trim : des valeurs
-			$(this).val($(this).val().trim());
+			// Trim des valeurs
+			if($(this).val()){
+				$(this).val($(this).val().trim());
+			}
 
 			// Simple champ required
 			if($(this).hasClass("required")){
@@ -123,6 +129,38 @@ $(function(){
 		});
 		
 		if(valid){
+			// Enregistrement dans la BDD
+			if(submit){
+				// Token et lang créés au chargement de la page (hidden au début du formulaire)
+				var lang=$(this).closest(".CJForm").find(".CJLang").val();
+				var token=$(this).closest(".CJForm").find(".CJToken").val();
+				
+				// Data : noms et valeurs des champs visibles 
+				var data=[{field: "lang", value: lang }];
+				$(".CJField:visible").each(function(){
+					if(($(this).attr("type")=="radio" && !$(this).prop("checked")) || ($(this).attr("type")=="checkbox" && !$(this).prop("checked"))){
+						data.push({field: $(this).attr("id"), value: null});
+					} else {
+						data.push({field: $(this).attr("id"), value: $(this).val()});
+					}
+				});
+				
+				// PostData : token + data + lang
+				var postData={token: token, data: data};
+				
+				$.ajax({
+					url: $(this).closest(".CJForm").attr("action"),
+					type: $(this).closest(".CJForm").attr("method"),
+					dataType: "json",
+					data: postData,
+					success: function(retour){
+					},
+					error: function(retour){
+						CJInfo(retour.responseText,"error");
+					},
+				});
+			}
+
 			// Navigation
 			$(".CJNavLi").removeClass("current");
 			$("#CJNavLi_"+sectionId).addClass("done");

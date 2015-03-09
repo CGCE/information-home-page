@@ -12,20 +12,23 @@ class CJForm{
 	public $navTable=array();
 	public $onSubmit=null;
     public $sectionNumber=0;
+    public $formBalise="";
 	
   public function CJForm(){
     $this->formNumber++;
-    $form="<form name='CJForm_{$this->formNumber}' id='CJForm_{$this->formNumber}' method='{$this->method}' action='{$this->action}' ";
-    if($this->onSubmit){
-      $form.="onsubmit='{$this->onSubmit}' ";
-    }
-    $form.=">";
-    $this->elem[]=$form;
+    $this->formBalise="<form name='CJForm_{$this->formNumber}' id='CJForm_{$this->formNumber}' class='CJForm' method='post' action='submit.php' >";
+    $token=date("Ymd-His-").rand(100,999);
+	$this->elem[]="<input type='hidden' name='token' value='$token' class='CJToken' />";
   }
 
+	public function action($action){
+	    $this->formBalise=str_replace("action='submit.php'","action='$action'",$this->formBalise);
+	}
+	
 	public function setLanguage($lang){
 		$this->lang=$GLOBALS['lang'];
 		$this->langCode=strtolower($lang);
+  		$this->elem[]="<input type='hidden' name='lang' value='$lang' class='CJLang'/>";
 	}
 
 	public function inputText($id,$required=false,$type=null){
@@ -368,6 +371,9 @@ class CJForm{
 	    }
 	    echo "</ul></nav>\n";
 	}
+
+	// Balise "form"
+	echo "{$this->formBalise}\n";
 
 	// Reste du formulaire
   	foreach($this->elem as $elem){
