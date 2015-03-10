@@ -272,7 +272,40 @@ $(document).ready(function(){
 	var id=$(".CJArticle:visible").attr("data-id");
 	$("#CJNavLi_"+id).addClass("current");
 
+	// Chargement des données
+	if($("#CJToken").val()){
+		var token=$("#CJToken").val();
+		var lang=$(".CJLang").val();
 
+		$.ajax({
+			url: "getData.php",
+			type: "post",
+			dataType: "json",
+			data: {token: token, lang: lang},
+			success: function(data){
+				for(field in data){
+					$("#"+field).val(data[field]);
+					
+				}
+
+				// A CONTINUER
+				// A CONTINUER
+				// A CONTINUER
+				
+				// Traiter les radios et checkbox différement
+				// Traiter les radios et checkbox différement
+				// Traiter les radios et checkbox différement
+				
+				// Afficher les other_ s'ils sont remplis
+				// Afficher les other_ s'ils sont remplis
+				// Afficher les other_ s'ils sont remplis
+				
+			},
+			error: function(retour){
+				CJInfo(retour.responseText,"error");
+			},		
+		});
+	}
 });
 
 

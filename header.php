@@ -14,6 +14,7 @@ if(isset($_GET['fr'])){
 	
 include "vendor/CJForm/CJForm.php";
 
+$token=isset($_GET['token'])?$_GET['token']:null;
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +55,7 @@ echo "<script type='text/JavaScript'>var date_format=\"{$lang['date_format']}\";
       $file=isset($_GET['en'])?"french_flag.jpg":"english_flag.jpg";
       $link=isset($_GET['en'])?"fr":"en";
 
-	    echo "<a href='index.php?$link'><img src='css/img/$file' alt='$alt' border='0'/></a>\n";
+	    echo "<a href='index.php?token=$token&amp;$link'><img src='css/img/$file' alt='$alt' border='0'/></a>\n";
     ?>
   </nav> <!-- flag -->
   <hr/>

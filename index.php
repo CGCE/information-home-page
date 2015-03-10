@@ -1,8 +1,11 @@
 <?php
 include "header.php";
 
+$token=isset($_GET['token'])?$_GET['token']:null;
+
 $f=new CJForm();
 $f->setLanguage($_SESSION['lang']);
+$f->token=$token;
 $f->nav=true;
 $f->newSection();
 

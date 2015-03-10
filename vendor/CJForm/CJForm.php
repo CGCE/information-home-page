@@ -4,6 +4,7 @@ class CJForm{
 
 	public $action=null;
     public $elem=array();
+    public $formBalise="";
 	public $formNumber=0;
 	public $lang=array();
 	public $langCode="en";
@@ -12,13 +13,11 @@ class CJForm{
 	public $navTable=array();
 	public $onSubmit=null;
     public $sectionNumber=0;
-    public $formBalise="";
+    public $token=null;
 	
   public function CJForm(){
     $this->formNumber++;
     $this->formBalise="<form name='CJForm_{$this->formNumber}' id='CJForm_{$this->formNumber}' class='CJForm' method='post' action='submit.php' >";
-    $token=date("Ymd-His-").rand(100,999);
-	$this->elem[]="<input type='hidden' name='token' value='$token' class='CJToken' />";
   }
 
 	public function action($action){
@@ -374,6 +373,13 @@ class CJForm{
 
 	// Balise "form"
 	echo "{$this->formBalise}\n";
+	
+	// Si Token : Javascript chargera les données dans le formulaire à partir de la BDD
+	if(!$this->token){
+		$this->token=date("Ymd-His-").rand(100,999);
+	}
+	echo "<input type='hidden' name='token' id='CJToken' class='CJToken' value='{$this->token}' />\n";
+
 
 	// Reste du formulaire
   	foreach($this->elem as $elem){

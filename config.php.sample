@@ -1,7 +1,19 @@
 <?php
 
 global $config;
-$config=array("dbhost"=>"dbhost", "dbname"=>"dbname", "dbuser"=>"dbuser", "dbpass"=>"dbpass");
+$config=array("dbhost"=>"dbhost", "dbname"=>"dbname", "dbuser"=>"dbuser", "dbpass"=>"dbpass", "dbtable"=>"dbtable");
 
-
+/*
+CREATE TABLE IF NOT EXISTS `dbtable` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(20) NOT NULL,
+  `token-field` varchar(200) NOT NULL,
+  `field` text NOT NULL,
+  `value` text NOT NULL,
+  `update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token-field` (`token-field`),
+  KEY `token` (`token`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=340 ;
+*/
 ?>
