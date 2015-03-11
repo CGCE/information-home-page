@@ -24,149 +24,7 @@ $(function(){
 	$(".CJButtonNext").click(function(){
 		var sectionId=$(this).attr("data-sectionId");
 		var nextSectionId=parseInt(sectionId)+1;
-		
-/*
-		// Variable submit = true si des champs sont visibles et si un enregistrement dans la BDD doit avoir lieu
-		var submit=false;
-		// Variable valid valable pour tout l'article affiché
-		var valid=true;
-		
-		$(".CJField:visible").each(function(){
-			submit=true;
-			
-			// Variables pour le champ en cours
-			var valid2=true;
-			var mustBeValidate=false;
-
-			// Trim des valeurs
-			if($(this).val()){
-				$(this).val($(this).val().trim());
-			}
-
-			// Simple champ required
-			if($(this).hasClass("required")){
-				mustBeValidate=true;
-				if(!$(this).val()){
-					valid=false;
-					valid2=false;
-				}
-			}
-				
-			// Champs "Others" visibles ne doivent jamais être vides
-			if($(this).hasClass("CJOther")){
-				mustBeValidate=true;
-				if(!$(this).val()){
-					valid=false;
-					valid2=false;
-				}
-			}
-			
-			// Champ e-mail
-			if($(this).hasClass("CJMail") && !CJValidMail($(this).val())){
-				mustBeValidate=true;
-				valid=false;					
-				valid2=false;
-			}
-
-			// Champ date EN
-			else if($(this).hasClass("CJDateEN") && !CJValidDateEN($(this).val())){
-				mustBeValidate=true;
-				valid=false;					
-				valid2=false;
-			}
-
-			// Champ date FR
-			else if($(this).hasClass("CJDateFR") && !CJValidDateFR($(this).val())){
-				mustBeValidate=true;
-				valid=false;					
-				valid2=false;
-			}
-			
-			// Champs horaires
-			// Si requis, les 2 champs doivent être remplis
-			// Si non requis, les 2 champs doivent être remplis ou les 2 chams doivent être vides
-			if($(this).hasClass("CJFieldHours")){
-			 	if($(this).val()){
-				 	$(this).closest("td").find("select").each(function(){
-				 		if(!$(this).val()){
-				 			mustBeValidate=true;
-							valid=false;
-							valid2=false;
-						}
-					});
-				} else {
-				 	$(this).closest("td").find("select").each(function(){
-				 		if($(this).val()){
-				 			mustBeValidate=true;
-							valid=false;
-							valid2=false;
-						}
-					});
-				
-				}
-			}
-			
-			// Si ce sont des boutons radio requis
-			// 1 bouton du groupe doit être coché
-			if($(this).attr("type")=="radio" && $(this).hasClass("required")){
-				valid2=false;
-				$(this).closest("td").find("input").each(function(){
-				 	if($(this).prop("checked")){
-				 		
-						valid2=true;
-					}
-				});
-				if(!valid2){
-					valid=false;
-				}
-			}
-				
-			if(mustBeValidate){
-				if(valid2){
-					// Affichage des icônes OK
-					$(this).closest("td").removeClass("CJFieldError");
-					$(this).closest("td").addClass("CJFieldOK");
-				} else {
-					// Affichage des icônes error
-					$(this).closest("td").removeClass("CJFieldOK");
-					$(this).closest("td").addClass("CJFieldError");
-				}
-			}
-		});
-		
-		if(valid){
-			// Enregistrement dans la BDD
-			if(submit){
-				// Token et lang créés au chargement de la page (hidden au début du formulaire)
-				var lang=$(this).closest(".CJForm").find(".CJLang").val();
-				var token=$(this).closest(".CJForm").find(".CJToken").val();
-				
-				// Data : noms et valeurs des champs visibles 
-				var data=[{field: "lang", value: lang }];
-				$(".CJField:visible").each(function(){
-					if(($(this).attr("type")=="radio" && !$(this).prop("checked")) || ($(this).attr("type")=="checkbox" && !$(this).prop("checked"))){
-						data.push({field: $(this).attr("id"), value: null});
-					} else {
-						data.push({field: $(this).attr("id"), value: $(this).val()});
-					}
-				});
-				
-				// PostData : token + data + lang
-				var postData={token: token, data: data};
-				
-				$.ajax({
-					url: $(this).closest(".CJForm").attr("action"),
-					type: $(this).closest(".CJForm").attr("method"),
-					dataType: "json",
-					data: postData,
-					success: function(retour){
-					},
-					error: function(retour){
-						CJInfo(retour.responseText,"error");
-					},
-				});
-			}
-*/
+	
 
 		if(CJSubmitForm()){
 
@@ -237,6 +95,45 @@ $(function(){
 	});
 	
 	
+	// Choix de plusieurs date (A CONTINUER) 
+	$(".CJFormAddDate").click(function(){
+		$(this).closest("tr").clone().insertAfter($(this).closest("tr"));
+	});
+	
+	// Select avec option "other"
+	$(".CJSelect").change(function(){
+		var id=$(this).attr("id");
+		if($("#tr_other_"+id).length>0){
+			if($(this).val()=="autre_precisez"){
+				$(this).attr("name","disabled_"+id);
+				$("#other_"+id).attr("name",id);
+				$("#tr_other_"+id).show();
+			}else{
+				$(this).attr("name",id);
+				$("#other_"+id).attr("name","other_"+id);
+				$("#tr_other_"+id).hide();
+			}			
+		}
+	});
+
+	// Checkbox avec option "other"
+	$(".CJCheckbox").click(function(){
+		var id=$(this).attr("id");
+	    if(index=id.indexOf("_")){
+    	  id=id.substr(0,index);
+   		}
+		var val=$(this).val();
+
+    	if($("#tr_other_"+id).length>0 && val=="autre_precisez"){
+			if($(this).prop("checked")){
+				$("#tr_other_"+id).show();
+			}else{
+				$("#tr_other_"+id).hide();
+			}			
+		}
+	});
+
+
 
 });
 
@@ -284,21 +181,32 @@ $(document).ready(function(){
 			data: {token: token, lang: lang},
 			success: function(data){
 				for(field in data){
-					$("#"+field).val(data[field]);
+					// Checkbox et radio
+					if($("#"+field).attr("type")=="radio" || $("#"+field).attr("type")=="checkbox"){
+						if(data[field]){
+							// .click mieux que .prop("checked",true) car permet d'afficher les textarea cachés si la valeur est autre_precisez
+							$("#"+field).click();
+						}
+					// Text, textarea, select
+					} else {
+						$("#"+field).val(data[field]);
+					//	if(
+					}
 					
+					// Select : la valeur est précédement positionnée et on ajoute .change pour afficher les input[type=text] cachés si la valeur est autre_precisez
+					if($("#"+field).is("select")){
+						$("#"+field).change();
+					}
 				}
 
 				// A CONTINUER
 				// A CONTINUER
 				// A CONTINUER
+
+				// Lang format date (lang en JS)
+				// Lang format date (lang en JS)
+				// Lang format date (lang en JS)
 				
-				// Traiter les radios et checkbox différement
-				// Traiter les radios et checkbox différement
-				// Traiter les radios et checkbox différement
-				
-				// Afficher les other_ s'ils sont remplis
-				// Afficher les other_ s'ils sont remplis
-				// Afficher les other_ s'ils sont remplis
 				
 			},
 			error: function(retour){
@@ -306,6 +214,10 @@ $(document).ready(function(){
 			},		
 		});
 	}
+	
+	// JQuery-UI Datepicker
+	$(".CJDatePicker").datepicker();
+
 });
 
 
