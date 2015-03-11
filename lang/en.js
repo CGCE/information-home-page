@@ -46,6 +46,8 @@ CJLangEN.beginningDate="Beginning date";
 CJLangEN.endingDate="Ending Date";
 
 CJLangEN.organizer="Organizer Information";
+CJLangEN.leader="Leader";
+CJLangEN.collaborator="Collaborator";
 CJLangEN.organizerNav="Organizer";
 CJLangEN.firstname="First Name";
 CJLangEN.lastname="Last Name";

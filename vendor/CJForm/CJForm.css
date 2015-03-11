@@ -10,6 +10,13 @@ h2.CJH{
   font-size: 1.2em;
 }
 
+h3.CJH{
+ text-align: left;
+ margin-bottom: 5px;
+ text-decoration: underline;
+ color: #012169;
+}
+
 .CJP {
 	text-align:justify;
   margin: 10px 0 0 0;

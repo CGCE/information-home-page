@@ -48,6 +48,8 @@ CJLangFR.organizer="Informations sur l'organisateur";
 CJLangFR.organizerNav="Organisateur";
 CJLangFR.firstname="Prénom";
 CJLangFR.lastname="Nom";
+CJLangFR.leader="Leader";
+CJLangFR.collaborator="Collaborator";
 
 CJLangFR.roomReserved="Room reserved";
 CJLangFR.grandeSalle="Grande Salle";

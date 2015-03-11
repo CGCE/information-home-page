@@ -6,6 +6,7 @@ class CJForm{
     public $elem=array();
     public $formBalise="";
 	public $formNumber=0;
+	public $idTable=array();
 	public $lang=array();
 	public $langCode="en";
 	public $method="post";
@@ -38,7 +39,20 @@ class CJForm{
 			$classRequired.=" CJ".ucfirst($type);
 		}	
 		
-		$this->elem[]="<tr><td><label for='$id' class='CJLabel $classRequired' data-id='$id'>$id</label>$star</td>";
+		$label=$id;
+		
+		if(in_array($id,$this->idTable)){
+			$i=2;
+			$tmp=$id."_".$i;
+			while(in_array($tmp,$this->idTable)){
+				$i++;
+				$tmp=$id."_".$i;
+			}
+			$id=$tmp;			
+		}
+		$this->idTable[]=$id;
+		
+		$this->elem[]="<tr><td><label for='$id' class='CJLabel $classRequired' data-id='$label'>$label</label>$star</td>";
 		$this->elem[]="<td><input type='text' name='$id' id='$id' class='CJField $classRequired' /></td></tr>";
 	}
 	
@@ -154,14 +168,18 @@ class CJForm{
 		$star=$required?"<span class='required'>&nbsp;*</span>":null;
 
     // if options like [0-20-1] : table between 0 and 20, increment = 1
+    // if options like [0-60-10],[60-200-20] : table between 0 and 60 increment = 10 then between 60 and 200 increment 20
     if(substr($options,0,1)=="["){
-      $options=str_replace(array("[","]"),null,$options);
-      $tmp=explode("-",$options);
-      $options=array();
-      for($i=$tmp[0];$i<=$tmp[1];$i=$i+$tmp[2]){
-        $option=$tmp[2]==1?$i:$i."-".($i+$tmp[2]-1);
-        $options[]=$option;
-      }      
+    	$tab=explode(",",$options);
+    	$options=array();
+		foreach($tab as $elem){
+      		$elem=str_replace(array("[","]"),null,$elem);
+    		$tmp=explode("-",$elem);
+     		for($i=$tmp[0];$i<=$tmp[1];$i=$i+$tmp[2]){
+      			$option=$tmp[2]==1?$i:$i."-".($i+$tmp[2]-1);
+       			$options[]=$option;
+     		}
+     	}
     }
 
     // if options is a string 
@@ -247,7 +265,7 @@ class CJForm{
             }
           }
 	
-  				$this->elem[]="<br/>";
+  		  $this->elem[]="<br/>";
           if($select){
             $this->elem[]="<div class='CJCheckboxesDiv'>";
           }

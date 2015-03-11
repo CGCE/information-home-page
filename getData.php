@@ -14,7 +14,7 @@ $db=new CJDB();
 $db->select($config['dbtable'],null,"token='$token'");
 if($db->result){
 	foreach($db->result as $elem){
-		$result[$elem['field']]=$elem['value'];
+		$result[$elem['field']]=html_entity_decode($elem['value'],ENT_QUOTES|ENT_IGNORE,"utf-8");
 	}
 }
 
