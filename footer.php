@@ -1,7 +1,6 @@
 <footer>
 <hr class='CJHr'/>
-<?php echo "* {$lang['obligatoire']}\n"; ?>
+<p>*&nbsp;<span class='CJLabel' data-id='obligatoire'></span></p>
 </footer>
-
 </body>
 </html>

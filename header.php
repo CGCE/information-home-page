@@ -30,7 +30,9 @@ echo "<script type='text/JavaScript'>var date_format=\"{$lang['date_format']}\";
 <link rel='stylesheet' type='text/css' href= 'css/style.css' media='all' />
 <script type='text/JavaScript' src='vendor/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js'></script>
 <script type='text/JavaScript' src='vendor/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js'></script>
-<?php if($_SESSION['lang']=="fr"){ echo "<script type='text/JavaScript' src='vendor/datePickerFr.js'></script>"; } ?>
+<script type='text/JavaScript' src='vendor/datePickerFr.js'></script>
+<script type='text/JavaScript' src='lang/en.js'></script>
+<script type='text/JavaScript' src='lang/fr.js'></script>
 <script type='text/JavaScript' src='vendor/CJForm/CJForm.js'></script>
 <script type='text/JavaScript' src='vendor/CJScript.js'></script>
 <script type='text/JavaScript' src='js/script.js'></script>
@@ -50,13 +52,8 @@ echo "<script type='text/JavaScript'>var date_format=\"{$lang['date_format']}\";
   </div> <!-- title -->
 
   <nav id='flag'>
-    <?php
-      $alt=isset($_GET['en'])?"Fran&ccedil;ais":"English";
-      $file=isset($_GET['en'])?"french_flag.jpg":"english_flag.jpg";
-      $link=isset($_GET['en'])?"fr":"en";
-
-	    echo "<a href='index.php?token=$token&amp;$link'><img src='css/img/$file' alt='$alt' border='0'/></a>\n";
-    ?>
+  	<img src='css/img/english_flag.jpg' alt='English' border='0' style='display:none;' class='CJFlag' data-lang='en'/>
+  	<img src='css/img/french_flag.jpg' alt='Fran&ccedil;ais' border='0' class='CJFlag' data-lang='fr' />
   </nav> <!-- flag -->
   <hr/>
 </header>

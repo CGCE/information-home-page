@@ -133,8 +133,44 @@ $(function(){
 		}
 	});
 
+	// Changement de la langue lors du click sur les drapeaux
+	$(".CJFlag").click(function(){
+		$(".CJLang").val($(this).attr("data-lang"));
+
+		// Affichage des labels dans la langue choisie
+		switch($(this).attr("data-lang")){
+			case "en" : var CJLang=CJLangEN; $(".CJDateFR").hide(); $(".CJDateEN").show(); break;
+			case "fr" : var CJLang=CJLangFR;  $(".CJDateEN").hide(); $(".CJDateFR").show(); break;
+			default : var CJLang=CJLangEN;  $(".CJDateFR").hide(); $(".CJDateEN").show(); break;
+		}
+	
+		$(".CJLabel").each(function(){
+			if($(this).is("input")){
+				$(this).val(CJLang[$(this).attr("data-id")]);
+			} else {
+				$(this).html(CJLang[$(this).attr("data-id")]);
+			}
+		});
+
+		$(".CJFlag:hidden").show();
+		$(this).hide();
+
+	});
 
 
+	$(".CJDateFR").change(function(){
+		var val=$(this).val();
+		val=val.replace(/([0-9]*)\/([0-9]*)\/([0-9]*)/,"$2/$1/$3");
+		$(this).closest("td").find(".CJDateEN").val(val)
+	});
+	
+	$(".CJDateEN").change(function(){
+		var val=$(this).val();
+		val=val.replace(/([0-9]*)\/([0-9]*)\/([0-9]*)/,"$2/$1/$3");
+		$(this).closest("td").find(".CJDateFR").val(val)
+	});
+	
+	
 });
 
 
@@ -216,8 +252,26 @@ $(document).ready(function(){
 	}
 	
 	// JQuery-UI Datepicker
-	$(".CJDatePicker").datepicker();
+	$(".CJDateEN").datepicker($.datepicker.regional['en']); 
+	$(".CJDateFR").datepicker($.datepicker.regional['fr']); 
+	
+	// Affichage des labels dans la langue choisie
+	switch($(".CJLang").val()){
+		case "en" : var CJLang=CJLangEN; $(".CJDateFR").hide(); $(".CJDateEN").show(); break;
+		case "fr" : var CJLang=CJLangFR;  $(".CJDateEN").hide(); $(".CJDateFR").show(); break;
+		default : var CJLang=CJLangEN;  $(".CJDateFR").hide(); $(".CJDateEN").show(); break;
+	}
+	
+	$(".CJLabel").each(function(){
+		if($(this).is("input")){
+			$(this).val(CJLang[$(this).attr("data-id")]);
+		} else {
+			$(this).html(CJLang[$(this).attr("data-id")]);
+		}
+	});
 
+
+	
 });
 
 
@@ -266,14 +320,14 @@ function CJSubmitForm(){
 		}
 
 		// Champ date EN
-		else if($(this).hasClass("CJDateEN") && !CJValidDateEN($(this).val())){
+		else if($(this).hasClass("CJDate") && $(".CJLang").val()=="en" && !CJValidDateEN($(this).val())){
 			mustBeValidate=true;
 			valid=false;					
 			valid2=false;
 		}
 
 		// Champ date FR
-		else if($(this).hasClass("CJDateFR") && !CJValidDateFR($(this).val())){
+		else if($(this).hasClass("CJDate") && $(".CJLang").val()=="fr" && !CJValidDateFR($(this).val())){
 			mustBeValidate=true;
 			valid=false;					
 			valid2=false;

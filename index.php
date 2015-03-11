@@ -1,6 +1,5 @@
 <?php
 include "header.php";
-
 $token=isset($_GET['token'])?$_GET['token']:null;
 
 $f=new CJForm();
@@ -15,7 +14,7 @@ $f->p("intro1");
 $f->buttons("startForm-next");
 $f->endArticle();
 
-$f->newArticle("project-nav");
+$f->newArticle("projectNav");
 $f->h("project");
 $f->inputText("CUGlobalCenter",true);
 $f->inputText("school",true);
@@ -27,7 +26,7 @@ $f->inputDates("endingDate",true);
 $f->buttons("previous-previous,next-next");
 $f->endArticle();
 
-$f->newArticle("organizer-nav");
+$f->newArticle("organizerNav");
 $f->h("organizer");
 $f->inputText("organizer",true);
 $f->inputText("firstname",true);
@@ -36,7 +35,7 @@ $f->inputText("courriel",true,"mail");
 $f->buttons("previous-previous,next-next");
 $f->endArticle();
 
-$f->newArticle("nature-nav");
+$f->newArticle("natureNav");
 $f->h("nature");
 $f->select("roomReserved","grandeSalle,salleConference,autre_precisez",true);
 
@@ -54,7 +53,7 @@ $f->select("personnes","[1-120-10]",true);
 $f->buttons("previous-previous,next-next");
 $f->endArticle();
 
-$f->newArticle("salle_equipements-nav");
+$f->newArticle("salle_equipementsNav");
 $f->h("salle_equipements");
 $f->select("disposition","chaises,tables,cocktail",true);
 $f->checkboxes("equipement","micros_avec_fils[1-4-1],micros_sans_fils[1-2-1],videoprojecteur,dvd,tableau_blanc,paper_board,autre_precisez");

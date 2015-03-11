@@ -1,3 +1,7 @@
+.CJFlag{
+	cursor: pointer;
+}
+
 .CJH{
   text-align: center;
 }
@@ -45,6 +49,10 @@ td.CJTdButtons input{
 	width:100%;
 	}
 
+.CJLabel.required,
+span.required{
+	font-weight: bold;
+}
 
 /* Navigation */
 nav.CJTdNavLinks{
