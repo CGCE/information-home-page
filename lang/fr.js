@@ -31,7 +31,10 @@ Once this form is validated, an Expense Authorization form will be \
 automatically generated. Please print it, and email the signed version to <a href='mailto:parisfinance.cgc@columbia.edu'>parisfinance.cgc@columbia.edu</a>, \
 along with a copy of the associated program/project budget.";
 CJLangFR.thanks="Thank you";
-CJLangFR.thanks1="Thank you ...";
+CJLangFR.thanks1="Thank you for filling out the reservation information form.<br/>\
+Your payment authorization form can now be downloaded <a href='#'>here</a>.<br/>\
+Once it is filled out and signed, please send it to <a href='mailto:parisfinance.cgc@columbia.edu'>parisfinance.cgc@columbia.edu</a>.<br/>\
+We look forward to welcoming you to our Center.";
 
 CJLangFR.project="Projet";
 CJLangFR.projectNav="Projet";
@@ -65,7 +68,8 @@ CJLangFR.previous="Précédent";
 CJLangFR.next="Suivant";
 CJLangFR.valider="Valider";
 CJLangFR.reset="Annuler";
-CJLangFR.ajouter="Ajouter";
+CJLangFR.add="Ajouter";
+CJLangFR.delete="Supprimer";
 CJLangFR.debut="Début";
 CJLangFR.fin="Fin";
 CJLangFR.oui="Oui";
@@ -132,3 +136,5 @@ CJLangFR.hour19="19:00";
 CJLangFR.hour20="20:00";
 CJLangFR.hour21="21:00";
 CJLangFR.hour22="22:00";
+
+CJLangFR.addDate="Ajouter une date";

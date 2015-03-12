@@ -57,35 +57,52 @@ class CJForm{
 		$this->elem[]="<td><textarea name='$id' id='$id' class='CJField $classRequired'></textarea></td></tr>";
 	}
 
-	public function inputDates($id,$required=false,$hours=false,$multiple=false){
+	public function inputDates($id,$required=false,$hours=false,$multiple=1){
 		$classRequired=$required?"required":null;
 		$star=$required?"<span class='required'>&nbsp;*</span>":null;
+		$CJFieldDateHours=$hours?"CJFieldDateHours":null;
+		
+		for($j=0;$j<$multiple;$j++){
+			$classRequired=$j==0?$classRequired:null;
+			$star=$j==0?$star:null;
+			$display=$j==0?null:"style='display:none;'";
 
-		$this->elem[]="<tr><td><label for='{$id}_date_0' class='CJLabel $classRequired' data-label='$id'>$id</label>$star</td><td>";
-		$this->elem[]="<input type='text' name='{$id}_date[]' id='{$id}_date_0_fr' class='CJField CJDatePicker $classRequired CJDateFR'/>";
-		$this->elem[]="<input type='text' name='{$id}_date[]' id='{$id}_date_0_en' class='CJField CJDatePicker $classRequired CJDateEN'/>";
+			$this->elem[]="<tr $display class='CJTRDate'><td><label for='{$id}_date_$j' class='CJLabel $classRequired' data-label='$id'>$id</label>$star</td><td>";
+			$this->elem[]="<input type='text' name='{$id}_date_{$j}_fr' id='{$id}_date_{$j}_fr' class='CJField CJDatePicker $CJFieldDateHours $classRequired CJDateFR'/>";
+			$this->elem[]="<input type='text' name='{$id}_date_{$j}_fr' id='{$id}_date_{$j}_en' class='CJField CJDatePicker $CJFieldDateHours $classRequired CJDateEN'/>";
 		
-		if($hours){
-			$this->elem[]="<label class='CJLabel' data-label='heure1'>heure1<L/label>";
-			$this->elem[]="<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='CJField CJSelect $classRequired' >";
-			$this->elem[]="<option value=''>&nbsp;</option>";
-			for($i=8;$i<22;$i++){
-				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";
+			if($hours){
+				$classMultiple=$multiple>1?"CJDatesMultiple":null;
+				$this->elem[]="<div class='CJDatesHours $classMultiple'>";
+				$this->elem[]="<label class='CJLabel' data-label='heure1'>heure1</label>";
+				$this->elem[]="<select name='{$id}_beginning_$j' id='{$id}_beginning_$j' class='CJField CJSelect CJFieldHours CJFieldHour1 $classRequired' >";
+				$this->elem[]="<option value=''>&nbsp;</option>";
+				for($i=8;$i<22;$i++){
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";
+				}
+				$this->elem[]="</select>";
+				$this->elem[]="<label class='CJLabel' data-label='heure2'>heure2</label>";
+				$this->elem[]="<select name='{$id}_ending_$j' id='{$id}_ending_$j' class='CJField CJSelect CJFieldHours CJFieldHour2 $classRequired' >";
+				$this->elem[]="<option value=''>&nbsp;</option>";
+				for($i=8;$i<22;$i++){
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";
+				}
+				$this->elem[]="</select>";
+				$this->elem[]="</div> <!-- CJDatesHours -->";
 			}
-			$this->elem[]="</select>";
-			$this->elem[]="<label class='CJLabel' data-label='heure2'>heure2</label>";
-			$this->elem[]="<select name='{$id}_fin[]' id='{$id}_fin_0' class='CJField CJSelect $classRequired' >";
-			$this->elem[]="<option value=''>&nbsp;</option>";
-			for($i=8;$i<22;$i++){
-				$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";
+			if($j>0){
+				$this->elem[]="<img src='css/img/delete.png' alt='delete' title='delete' class='CJFormDeleteDate CJLabel' data-label='delete' />";
 			}
-			$this->elem[]="</select>";
+			
+			
+			$this->elem[]="</td></tr>";
 		}
 		
-		if($multiple){
-			$this->elem[]="<img src='../img/add.gif' class='CJFormAddDate' style='cursor:pointer;' alt='ajouter' class='CJLabel' data-label='ajouter' />";
+		if($multiple>1){
+			$this->elem[]="<tr><td></td><td><img src='css/img/add.png' alt='add' title='add' class='CJFormAddDate CJLabel' data-label='add' />";
+			$this->elem[]="<label class='CJFormAddDate CJLabel' data-label='addDate'>addDate</label></td></tr>";
 		}
-		$this->elem[]="</td></tr>";
+
 	}
 
 	public function selectHours($id,$required=false,$multiple=false){
@@ -97,7 +114,7 @@ class CJForm{
 		
 		$this->elem[]="<div class='CJCheckboxesDiv'>";
 		$this->elem[]="<label class='CJLabel' data-label='heure1'>heure1</label>";
-		$this->elem[]="<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='CJField CJSelect CJFieldHours $classRequired' style='width:150px;'>";
+		$this->elem[]="<select name='{$id}_hour1[]' id='{$id}_hour1_0' class='CJField CJSelect CJFieldHours $classRequired'>";
 		$this->elem[]="<option value=''>&nbsp;</option>";
 		for($i=8;$i<22;$i++){
 			$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";
@@ -106,7 +123,7 @@ class CJForm{
 		
 		$this->elem[]="<div class='CJCheckboxesDiv'>";
 		$this->elem[]="<label class='CJLabel' data-label='heure2'>heure2</label>";
-		$this->elem[]="<select name='{$id}_fin[]' id='{$id}_fin_0' class='CJField CJSelect CJFieldHours $classRequired' style='width:150px;' >";
+		$this->elem[]="<select name='{$id}_fin[]' id='{$id}_fin_0' class='CJField CJSelect CJFieldHours $classRequired' >";
 		$this->elem[]="<option value=''>&nbsp;</option>";
 		for($i=8;$i<22;$i++){
 			$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";

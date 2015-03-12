@@ -96,8 +96,14 @@ $(function(){
 	
 	
 	// Choix de plusieurs date (A CONTINUER) 
+	// Ajout de dates
 	$(".CJFormAddDate").click(function(){
-		$(this).closest("tr").clone().insertAfter($(this).closest("tr"));
+		$(".CJTRDate:hidden:first").show();
+	});
+	// Suppression de dates
+	$(".CJFormDeleteDate").click(function(){
+		$(this).closest(".CJTRDate").find(".CJField").val(null);
+		$(this).closest(".CJTRDate").hide();
 	});
 	
 	// Select avec option "other"
@@ -152,6 +158,7 @@ $(function(){
 				$(this).val(text);
 			} else if($(this).is("img")){
 				$(this).attr("alt",text);
+				$(this).attr("title",text);
 			} else if($(this).is("title")){
 				$(this).text(text.substring(0,text.indexOf("<")));
 			} else {
@@ -204,7 +211,7 @@ $(document).ready(function(){
 	maxTop+=$(".CJSection").position().top;
 
 	// + marge de 60px pour les inputs other cachés
-	maxTop+=60;
+	maxTop+=40;
 	$("footer").css("top",maxTop);
 	
 	// Navigation
@@ -236,6 +243,11 @@ $(document).ready(function(){
 					// Text, textarea, select, hidden
 					} else {
 						$("#"+field).val(data[field]);
+						
+						// Affichage des dates cachées (option multiple)
+						if($("#"+field).val()){
+							$("#"+field).closest("tr").show();
+						}
 					}
 					
 					// Select : la valeur est précédement positionnée et on ajoute .change pour afficher les input[type=text] cachés si la valeur est autre_precisez
@@ -262,8 +274,7 @@ $(document).ready(function(){
 		case "fr" : var CJLang=CJLangFR;  $(".CJDateEN").hide(); $(".CJDateFR").show(); $(".CJFlagEN").show(); $(".CJFlagFR").hide();	break;
 		default : var CJLang=CJLangEN;  $(".CJDateFR").hide(); $(".CJDateEN").show(); $(".CJFlagFR").show(); $(".CJFlagEN").hide();		break;
 	}
-	
-		
+
 
 	$(".CJLabel").each(function(){
 		var text=CJLang[$(this).attr("data-label")];
@@ -272,6 +283,7 @@ $(document).ready(function(){
 			$(this).val(text);
 		} else if($(this).is("img")){
 			$(this).attr("alt",text);
+			$(this).attr("title",text);
 		} else if($(this).is("title")){
 			$(this).text(text.substring(0,text.indexOf("<")));
 		} else {
@@ -290,7 +302,8 @@ function CJSubmitForm(){
 	var submit=false;
 	// Variable valid valable pour tout l'article affiché
 	var valid=true;
-		
+	
+	// Valide tous les élements visibles
 	$(".CJField:visible").each(function(){
 		submit=true;
 		
@@ -329,33 +342,40 @@ function CJSubmitForm(){
 		}
 
 		// Champ date EN
-		else if($(this).hasClass("CJDate") && $(".CJLang").val()=="en" && !CJValidDateEN($(this).val())){
+		else if($(this).hasClass("CJDateEN") && !CJValidDateEN($(this).val())){
 			mustBeValidate=true;
 			valid=false;					
 			valid2=false;
 		}
 
 		// Champ date FR
-		else if($(this).hasClass("CJDate") && $(".CJLang").val()=="fr" && !CJValidDateFR($(this).val())){
+		else if($(this).hasClass("CJDateFR") && !CJValidDateFR($(this).val())){
 			mustBeValidate=true;
 			valid=false;					
 			valid2=false;
 		}
-			
+	
 		// Champs horaires
-		// Si requis, les 2 champs doivent être remplis
-		// Si non requis, les 2 champs doivent être remplis ou les 2 chams doivent être vides
+		// Si requis, tous les champs de la ligne doivent être remplis
+		// Si non requis, les champs de la lignes doivent être tous remplis ou tous vides
 		if($(this).hasClass("CJFieldHours")){
 		 	if($(this).val()){
-			 	$(this).closest("td").find("select").each(function(){
+				 mustBeValidate=true;
+
+				// Si le 1er est supérieur ou égal au 2nd
+				if($(this).closest("td").find(".CJFieldHour1").val() >= $(this).closest("td").find(".CJFieldHour2").val()){
+					valid=false;
+					valid2=false;
+				 }
+
+			 	$(this).closest("td").find(".CJField").each(function(){
 			 		if(!$(this).val()){
-			 			mustBeValidate=true;
 						valid=false;
 						valid2=false;
 					}
 				});
 			} else {
-			 	$(this).closest("td").find("select").each(function(){
+			 	$(this).closest("td").find(".CJField").each(function(){
 			 		if($(this).val()){
 			 			mustBeValidate=true;
 						valid=false;
@@ -363,7 +383,26 @@ function CJSubmitForm(){
 					}
 				});
 			}
+			
+			
+			
+			// Champs horaires avec date FR
+			 $(this).closest("td").find(".CJDateFR").each(function(){
+			 	if(!CJValidDateFR($(this).val())){
+			 		valid=false;
+			 		valid2=false;
+			 	}
+			 });
+			 
+			// Champs horaires avec date EN
+			 $(this).closest("td").find(".CJDateEN").each(function(){
+			 	if(!CJValidDateEN($(this).val())){
+			 		valid=false;
+			 		valid2=false;
+			 	}
+			 });
 		}
+
 		
 		// Si ce sont des boutons radio requis
 		// 1 bouton du groupe doit être coché
@@ -399,9 +438,11 @@ function CJSubmitForm(){
 			var lang=$("#CJLang").val();
 			var token=$("#CJToken").val();
 			
-			// Data : noms et valeurs des champs visibles 
+			// Data : noms et valeurs des champs visibles + langage
 			var data=[{field: "CJLang", value: lang }];
-			$(".CJField:visible").each(function(){
+			
+			// Tous les éléments de l'article courant sont envoyés, qu'ils soient visibles ou non
+			$(".CJArticle:visible").find(".CJField").each(function(){
 				if(($(this).attr("type")=="radio" && !$(this).prop("checked")) || ($(this).attr("type")=="checkbox" && !$(this).prop("checked"))){
 					data.push({field: $(this).attr("id"), value: null});
 				} else {

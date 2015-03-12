@@ -27,8 +27,7 @@ $f->inputText("school",true);
 $f->inputText("programTitle",true);
 $f->inputText("programProject",true);
 $f->inputText("costEstimate",true);
-$f->inputDates("beginningDate",true);
-$f->inputDates("endingDate",true);
+$f->inputDates("dates",true,true,7);
 $f->buttons("previous-previous,next-next");
 $f->endArticle();
 
