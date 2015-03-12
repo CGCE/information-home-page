@@ -1,9 +1,15 @@
 <?php
+ini_set('display_errors',1);
+error_reporting(999);
+
+include "vendor/CJForm/CJForm.php";
 include "header.php";
+
+
+
 $token=isset($_GET['token'])?$_GET['token']:null;
 
 $f=new CJForm();
-$f->setLanguage($_SESSION['lang']);
 $f->token=$token;
 $f->nav=true;
 $f->newSection();
@@ -80,6 +86,8 @@ $f->endArticle();
 $f->endSection();
 $f->endForm();
 $f->show();
-
 include "footer.php";
+
+echo substr("hello",0,-2);
+echo "hello";
 ?>

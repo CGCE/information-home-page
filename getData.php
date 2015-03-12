@@ -6,7 +6,6 @@ require_once "config.php";
 require_once "vendor/CJDB.php";
 
 $token=$_POST["token"];
-$lang=$_POST["lang"];
 
 
 $result=array();
@@ -18,13 +17,20 @@ if($db->result){
 	}
 }
 
-$dateReplace=$lang=="fr"?'\3/\2/\1':'\2/\3/\1';
-
 $keys=array_keys($result);
 foreach($keys as $key){
+	// Met les dates aux formats EN et FR
 	if(strpos($key,"_date_")){
+		if(substr($key,-2)=="fr"){
+			$dateReplace='\3/\2/\1';
+		}
+		if(substr($key,-2)=="en"){
+			$dateReplace='\2/\3/\1';
+		}
+
 		$result[$key]=preg_replace('/([0-9]*)-([0-9]*)-([0-9]*)/', $dateReplace, $result[$key]);
 	}
+
 }
 
 echo json_encode($result);

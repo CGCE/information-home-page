@@ -135,7 +135,7 @@ $(function(){
 
 	// Changement de la langue lors du click sur les drapeaux
 	$(".CJFlag").click(function(){
-		$(".CJLang").val($(this).attr("data-lang"));
+	 	$("#CJLang").val($(this).attr("data-lang")); 
 
 		// Affichage des labels dans la langue choisie
 		switch($(this).attr("data-lang")){
@@ -143,12 +143,19 @@ $(function(){
 			case "fr" : var CJLang=CJLangFR;  $(".CJDateEN").hide(); $(".CJDateFR").show(); break;
 			default : var CJLang=CJLangEN;  $(".CJDateFR").hide(); $(".CJDateEN").show(); break;
 		}
-	
+
+
 		$(".CJLabel").each(function(){
+			var text=CJLang[$(this).attr("data-label")];
+		
 			if($(this).is("input")){
-				$(this).val(CJLang[$(this).attr("data-id")]);
+				$(this).val(text);
+			} else if($(this).is("img")){
+				$(this).attr("alt",text);
+			} else if($(this).is("title")){
+				$(this).text(text.substring(0,text.indexOf("<")));
 			} else {
-				$(this).html(CJLang[$(this).attr("data-id")]);
+				$(this).html(text);
 			}
 		});
 
@@ -206,15 +213,18 @@ $(document).ready(function(){
 	$("#CJNavLi_"+id).addClass("current");
 
 	// Chargement des données
-	if($("#CJToken").val()){
+	if(!$("#CJTokenNotGiven").length){
+		// Cache la page le temps de récupérer les données
+		$("body").hide();
 		var token=$("#CJToken").val();
-		var lang=$(".CJLang").val();
-
+		
 		$.ajax({
 			url: "getData.php",
 			type: "post",
 			dataType: "json",
-			data: {token: token, lang: lang},
+			data: {token: token},
+			// Async sinon ne récupère pas la valeur de CJLang
+			async: false,
 			success: function(data){
 				for(field in data){
 					// Checkbox et radio
@@ -223,10 +233,9 @@ $(document).ready(function(){
 							// .click mieux que .prop("checked",true) car permet d'afficher les textarea cachés si la valeur est autre_precisez
 							$("#"+field).click();
 						}
-					// Text, textarea, select
+					// Text, textarea, select, hidden
 					} else {
 						$("#"+field).val(data[field]);
-					//	if(
 					}
 					
 					// Select : la valeur est précédement positionnée et on ajoute .change pour afficher les input[type=text] cachés si la valeur est autre_precisez
@@ -234,21 +243,13 @@ $(document).ready(function(){
 						$("#"+field).change();
 					}
 				}
-
-				// A CONTINUER
-				// A CONTINUER
-				// A CONTINUER
-
-				// Lang format date (lang en JS)
-				// Lang format date (lang en JS)
-				// Lang format date (lang en JS)
-				
-				
 			},
 			error: function(retour){
 				CJInfo(retour.responseText,"error");
 			},		
 		});
+		// Affiche la page
+		$("body").show();
 	}
 	
 	// JQuery-UI Datepicker
@@ -256,17 +257,25 @@ $(document).ready(function(){
 	$(".CJDateFR").datepicker($.datepicker.regional['fr']); 
 	
 	// Affichage des labels dans la langue choisie
-	switch($(".CJLang").val()){
-		case "en" : var CJLang=CJLangEN; $(".CJDateFR").hide(); $(".CJDateEN").show(); break;
-		case "fr" : var CJLang=CJLangFR;  $(".CJDateEN").hide(); $(".CJDateFR").show(); break;
-		default : var CJLang=CJLangEN;  $(".CJDateFR").hide(); $(".CJDateEN").show(); break;
+	switch($("#CJLang").val()){
+		case "en" : var CJLang=CJLangEN; $(".CJDateFR").hide(); $(".CJDateEN").show(); $(".CJFlagFR").show(); $(".CJFlagEN").hide();	break;
+		case "fr" : var CJLang=CJLangFR;  $(".CJDateEN").hide(); $(".CJDateFR").show(); $(".CJFlagEN").show(); $(".CJFlagFR").hide();	break;
+		default : var CJLang=CJLangEN;  $(".CJDateFR").hide(); $(".CJDateEN").show(); $(".CJFlagFR").show(); $(".CJFlagEN").hide();		break;
 	}
 	
+		
+
 	$(".CJLabel").each(function(){
+		var text=CJLang[$(this).attr("data-label")];
+		
 		if($(this).is("input")){
-			$(this).val(CJLang[$(this).attr("data-id")]);
+			$(this).val(text);
+		} else if($(this).is("img")){
+			$(this).attr("alt",text);
+		} else if($(this).is("title")){
+			$(this).text(text.substring(0,text.indexOf("<")));
 		} else {
-			$(this).html(CJLang[$(this).attr("data-id")]);
+			$(this).html(text);
 		}
 	});
 
@@ -387,11 +396,11 @@ function CJSubmitForm(){
 		// Enregistrement dans la BDD
 		if(submit){
 			// Token et lang créés au chargement de la page (hidden au début du formulaire)
-			var lang=$(".CJLang").val();
-			var token=$(".CJToken").val();
+			var lang=$("#CJLang").val();
+			var token=$("#CJToken").val();
 			
 			// Data : noms et valeurs des champs visibles 
-			var data=[{field: "lang", value: lang }];
+			var data=[{field: "CJLang", value: lang }];
 			$(".CJField:visible").each(function(){
 				if(($(this).attr("type")=="radio" && !$(this).prop("checked")) || ($(this).attr("type")=="checkbox" && !$(this).prop("checked"))){
 					data.push({field: $(this).attr("id"), value: null});
