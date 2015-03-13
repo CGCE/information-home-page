@@ -457,6 +457,9 @@ function CJSubmitForm(){
 				url: $(".CJForm").attr("action"),
 				type: $(".CJForm").attr("method"),
 				dataType: "json",
+  			// Async =false sinon ne récupère pas la valeur de valid
+        // Mais async=true sinon validation trop longue entre chaque étape  			
+        async: true,
 				data: postData,
 				success: function(retour){
 				},
