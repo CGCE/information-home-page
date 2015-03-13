@@ -3,6 +3,7 @@ ini_set('display_errors',1);
 error_reporting(999);
 
 include "vendor/CJForm/CJForm.php";
+include "vendor/fpdf17/fpdf.php";
 include "header.php";
 
 
@@ -13,7 +14,7 @@ $f=new CJForm();
 $f->token=$token;
 $f->nav=true;
 $f->newSection();
-
+/*
 $f->newArticle("intro");
 $f->h("intro");
 $f->p("intro1");
@@ -76,7 +77,7 @@ $f->h("commentaires");
 $f->textarea("commentaires");
 $f->buttons("previous-previous,endForm-next");
 $f->endArticle();
-
+*/
 $f->newArticle();
 $f->h("thanks");
 $f->p("thanks1");

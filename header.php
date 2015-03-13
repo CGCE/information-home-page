@@ -13,7 +13,7 @@
 <script type='text/JavaScript' src='lang/fr.js'></script>
 <script type='text/JavaScript' src='vendor/CJForm/CJForm.js'></script>
 <script type='text/JavaScript' src='vendor/CJScript.js'></script>
-<script type='text/JavaScript' src='js/script.js'></script>
+<script type='text/JavaScript' src='js/PDFCreator.js'></script>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 </head>
 

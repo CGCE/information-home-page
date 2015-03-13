@@ -17,6 +17,9 @@ $(function(){
 			$("#CJArticle_"+sectionId).hide("slide",{direction:"right"},500,function(){
 				$("#CJArticle_"+PreviousSectionId).show("slide",{direction:"left"},500);
 			});
+
+      // ScrollTop 0
+      $(document).scrollTop(0);
 		}
 	});
 	
@@ -37,6 +40,10 @@ $(function(){
 			$("#CJArticle_"+sectionId).hide("slide",{direction:"left"},500,function(){
 				$("#CJArticle_"+nextSectionId).show("slide",{direction:"right"},500);
 			});
+
+      // ScrollTop 0
+      $(document).scrollTop(0);
+
 		}
 	});
 	
@@ -68,6 +75,10 @@ $(function(){
 				$(".CJArticle:visible").hide("slide",{direction:direction1},500,function(){
 					$("#CJArticle_"+newId).show("slide",{direction:direction2},500);
 				});
+
+      // ScrollTop 0
+      $(document).scrollTop(0);
+
 			}
 		}
 	});

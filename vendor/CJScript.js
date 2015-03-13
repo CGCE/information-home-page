@@ -20,13 +20,31 @@ function CJErrorHighlight(e, type, icon) {
     });
 }
 
-function CJInfo(message,type,top,time){
+function CJFileExists(url){
+  $.ajax({
+    url: url,
+    type:'HEAD',
+    async: false,
+    error: function(retour){
+        return false;
+    },
+    success: function(retour){
+        return true;
+    }
+  });
+}
+
+function CJInfo(message,type,top,time,myClass){
   if(top==undefined){
-    top=60;
+    top=82;
   }
   
   if(time==undefined){
-    time=5000;
+    time=8000;
+  }
+
+  if(myClass==undefined){
+    myClass=null;
   }
 
   if(typeof(timeoutJSInfo)!== "undefined"){
@@ -39,7 +57,7 @@ function CJInfo(message,type,top,time){
 		top=$(this).position().top+$(this).height();
 	});
 
-  $("body").append("<div class='CJInfo' id='CJInfo"+id+"' data-id='"+id+"'>"+message+"</div>");
+  $("body").append("<div class='CJInfo "+myClass+"' id='CJInfo"+id+"' data-id='"+id+"'>"+message+"</div>");
   CJErrorHighlight($("#CJInfo"+id),type);
   CJPosition($("#CJInfo"+id),top,"center");
   timeoutCJInfo=window.setTimeout(function(){
@@ -53,11 +71,11 @@ function CJInfo(message,type,top,time){
 }
 
 function CJPosition(object,top,left){
-  if(left=="center"){
-    left=($(document).width()-object.width())/2;
-  }
   object.css("position","absolute");
   object.css("z-index",10);
   object.css("top",top);
-  object.css("margin-left","auto");
+  if(left=="center"){
+    left=($(window).width()-object.width())/2;
+    object.css("left",left);
+  }
 }
