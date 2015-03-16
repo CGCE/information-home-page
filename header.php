@@ -24,7 +24,8 @@
     <img src='css/img/logo.gif' alt='Columbia Global Centers | Europe'/>
   </div> <!-- logo -->
 
-  <div id='title' class='CJLabel' data-label='titre'>title</div> <!-- title -->
+  <div id='title' class='CJLabel' data-label='title'>title</div> <!-- title -->
+  <div id='subtitle' class='CJLabel' data-label='subtitle'>subtitle</div> <!-- title -->
 
   <nav id='flag'>
   	<img src='css/img/english_flag.jpg' alt='English' border='0' style='display:none;' class='CJFlag CJFlagEN' data-lang='en'/>

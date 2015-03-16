@@ -14,7 +14,7 @@ $f=new CJForm();
 $f->token=$token;
 $f->nav=true;
 $f->newSection();
-/*
+
 $f->newArticle("intro");
 $f->h("intro");
 $f->p("intro1");
@@ -26,7 +26,7 @@ $f->h("project");
 $f->inputText("CUGlobalCenter",true);
 $f->inputText("school",true);
 $f->inputText("programTitle",true);
-$f->inputText("programProject",true);
+$f->inputText("programDesc",true);
 $f->inputText("costEstimate",true);
 $f->inputDates("dates",true,true,7);
 $f->buttons("previous-previous,next-next");
@@ -77,7 +77,7 @@ $f->h("commentaires");
 $f->textarea("commentaires");
 $f->buttons("previous-previous,endForm-next");
 $f->endArticle();
-*/
+
 $f->newArticle();
 $f->h("thanks");
 $f->p("thanks1");
@@ -87,7 +87,4 @@ $f->endSection();
 $f->endForm();
 $f->show();
 include "footer.php";
-
-echo substr("hello",0,-2);
-echo "hello";
 ?>

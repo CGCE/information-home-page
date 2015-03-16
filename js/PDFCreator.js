@@ -1,7 +1,7 @@
 function generatePDF(){
   // Affiche un message pour faire patienter
   // A Faire : Utilser les fichiers lang/xx.js
-  CJInfo("Veuillez patienter pendant la génération du fichier PDF","highlight",80,100000,"CJPdfWait");
+  CJInfo("Please wait ...","highlight",80,100000,"CJPdfWait");
 
   // Génératon du PDF
   var token = $("#CJToken").val();
@@ -28,9 +28,6 @@ function generatePDF(){
 
   });
 
-
-  // Lorsque le PDF est prêt, supprimer le message est télécharger le fichier
-  // $(".CJPdfWait").remove();
 
   // 3 Lignes suivantes à supprimer : test  
   setTimeout(function(){

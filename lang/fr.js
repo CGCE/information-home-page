@@ -1,7 +1,7 @@
 ﻿CJLangFR={};
 
-CJLangFR.titre="Formulaire d'information<br/>N° 2015-01";
-CJLangFR.subtitle="<p style='color:red;font-size:12pt;'>Attention, ceci n'est pas un formulaire de r&eacute;servation.<br/>Les r&eacute;servations se font par e-mail.</p>";
+CJLangFR.title="Formulaire d'information";
+CJLangFR.subtitle="Non-CU Expense Authorization";
 CJLangFR.membres="Membres";
 CJLangFR.dates_contacts="Dates et contacts";
 CJLangFR.evenement="Titre de l'événement";

@@ -262,7 +262,7 @@ class CJForm{
             $this->elem[]="</div> <!-- class=CJCheckboxesDiv -->";
             $this->elem[]="<div class='CJCheckboxesSelectNb'>";
             $this->elem[]="<label class='CJLabel' data-label='nombre'>nombre</label>";
-            $this->elem[]="<select name='{$id}_{$option}_nb' id='{$id}_{$i}_nb' data-label='{$id}_$i' class='CJField CJSelect CJCheckboxesSelect'>";
+            $this->elem[]="<select name='{$id}_{$option}_nb' id='{$id}_{$i}_nb' data-id='{$id}_$i' class='CJField CJSelect CJCheckboxesSelect'>";
             $this->elem[]="<option value=''>&nbsp;</option>";
             foreach($select as $elem){
               $this->elem[]="<option value='$elem'>$elem</option>";

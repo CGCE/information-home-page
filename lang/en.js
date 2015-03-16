@@ -1,7 +1,7 @@
 ﻿CJLangEN={};
 
-CJLangEN.titre="Information Form<br/>N° 2015-01";
-CJLangEN.subtitle="<p style='color:red;font-size:12pt;'>Attention, This is not a reservation form.<br/>Reservations should be made by email.</p>";
+CJLangEN.title="Information Form";
+CJLangEN.subtitle="Non-CU Expense Authorization";
 CJLangEN.membres="for members";
 CJLangEN.dates_contacts="Dates and contact information";
 CJLangEN.evenement="Exact title of event";

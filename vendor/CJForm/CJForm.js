@@ -106,15 +106,25 @@ $(function(){
 	});
 	
 	
-	// Choix de plusieurs date (A CONTINUER) 
+	// Choix de plusieurs date
 	// Ajout de dates
 	$(".CJFormAddDate").click(function(){
 		$(".CJTRDate:hidden:first").show();
+		if($(".CJTRDate:visible").length==$(".CJTRDate").length){
+			$(this).closest("td").hide();
+		}
 	});
+
 	// Suppression de dates
 	$(".CJFormDeleteDate").click(function(){
 		$(this).closest(".CJTRDate").find(".CJField").val(null);
 		$(this).closest(".CJTRDate").hide();
+		$(this).closest("td").removeClass("CJFieldError");
+		$(this).closest("td").removeClass("CJFieldOK");
+
+		if($(".CJTRDate:visible").length!=$(".CJTRDate").length){
+			$(".CJFormAddDate").closest("td").show();
+		}
 	});
 	
 	// Select avec option "other"
@@ -170,8 +180,6 @@ $(function(){
 			} else if($(this).is("img")){
 				$(this).attr("alt",text);
 				$(this).attr("title",text);
-			} else if($(this).is("title")){
-				$(this).text(text.substring(0,text.indexOf("<")));
 			} else {
 				$(this).html(text);
 			}
@@ -295,8 +303,6 @@ $(document).ready(function(){
 		} else if($(this).is("img")){
 			$(this).attr("alt",text);
 			$(this).attr("title",text);
-		} else if($(this).is("title")){
-			$(this).text(text.substring(0,text.indexOf("<")));
 		} else {
 			$(this).html(text);
 		}
