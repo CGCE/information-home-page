@@ -12,10 +12,10 @@
 
 /* General style */
 body {
-  width: 800px;
+	width: 800px;
 	font-family: "garamond";
-  font-size:11.5pt;
-  margin: auto;
+	font-size:11.5pt;
+	margin: auto;
 }
 
 h2{
@@ -25,70 +25,48 @@ h2{
 
 /* Header */
 header {
-  display:block;
-  position: absolute;
-  top: 0;
-  height: 82px;
-  background: #FFF;
-  z-index: 10;
+	display:block;
+	position: absolute;
+	top: 0;
+	height: 82px;
+	background: #FFF;
+	z-index: 10;
 }
 
 #logo{
-  display:block;
-  position: absolute;
-  top: 18px;
-  margin-left:10px;
+	display:block;
+	position: absolute;
+	top: 18px;
+	margin-left:10px;
 }
 
 #title,#subtitle {
-  display:block;
-  position: absolute;
-  top: 20px;
-  width: 745px;
-  text-align:right;
-  color:#014890;
-  font-size: 1.4em;  
+	display:block;
+	position: absolute;
+	top: 20px;
+	width: 790px;		/* Mettre 745 si traductions */
+	text-align:right;
+	color:#014890;
+	font-size: 1.4em;  
 }
 
 #subtitle {
-  top: 45px;
-  font-size: 1.2em;  
+	top: 45px;
+	font-size: 1.2em;  
 }
 
 #flag {
-  display:block;
-  position: absolute;
-  top: 25px;
-  width: 790px;
-  text-align:right;
-	}
+	display:none;		/* Mettre block si traductions */
+	position: absolute;
+	top: 25px;
+	width: 790px;
+	text-align:right;
+}
 
 header hr{
-  position: absolute;
-  top : 80px;	
-  margin: 0 12px;
+	position: absolute;
+	top : 80px;	
+	margin: 0 12px;
 	color:#014890;
 	width:776px;
 }
-
-
-
-
-/* Section */
-section{
-  display:block;
-  position: absolute;
-}
-
-tr {
-	vertical-align:top;
-	}
-
-.marge1 {
-	margin-left:30px;
-	}
-
-.result {
-	font-weight:bold;
-	color:#000;
-	}
