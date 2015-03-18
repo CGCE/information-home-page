@@ -34,7 +34,7 @@ h3.CJH{
 	}
 	
 .CJTable{
-	width:800px;
+	width:900px;
 	font-size: 1.0em;
 }
 
@@ -76,7 +76,7 @@ span.required{
 nav.CJTdNavLinks{
 	position : absolute;
 	top: 75px;
-	width:800px;
+	width:900px;
 	height: 70px;
 	color: #6cace4;
 	font-weight: bold;
@@ -201,5 +201,5 @@ textarea.CJField{
 
 footer{
 	position: absolute;
-  	width:800px;
+  	width:900px;
 }

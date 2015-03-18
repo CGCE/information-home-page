@@ -12,9 +12,9 @@
 
 /* General style */
 body {
-	width: 800px;
+	width: 900px;
 	font-family: "garamond";
-	font-size:11.5pt;
+	font-size:12pt;
 	margin: auto;
 }
 
@@ -44,7 +44,7 @@ header {
 	display:block;
 	position: absolute;
 	top: 20px;
-	width: 790px;		/* Mettre 745 si traductions */
+	width: 845px;		/* Mettre 745 si traductions */
 	text-align:right;
 	color:#014890;
 	font-size: 1.4em;  
@@ -56,10 +56,10 @@ header {
 }
 
 #flag {
-	display:none;		/* Mettre block si traductions */
+	display:block;		/* Mettre block si traductions */
 	position: absolute;
 	top: 25px;
-	width: 790px;
+	width: 890px;
 	text-align:right;
 }
 
@@ -68,5 +68,9 @@ header hr{
 	top : 80px;	
 	margin: 0 12px;
 	color:#014890;
-	width:776px;
+	width:876px;
+}
+
+.CJP{
+	text-align: left;
 }
