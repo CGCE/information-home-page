@@ -48,7 +48,7 @@ h3.CJH{
 }
 	
 .CJTable td:first-child{
-	width:300px;
+	width:400px;
 }
 
 td.CJTdButtons{
@@ -80,7 +80,7 @@ nav.CJTdNavLinks{
 	height: 70px;
 	color: #6cace4;
 	font-weight: bold;
-  font-size: 0.9em;
+  	font-size: 1em;
 }
 
 .CJNavLi span{
