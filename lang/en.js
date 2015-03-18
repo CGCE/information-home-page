@@ -41,7 +41,7 @@ CJLangEN.projectNav="Project";
 CJLangEN.CUGlobalCenter="CU Global Center";
 CJLangEN.school="School / Institution";
 CJLangEN.programTitle="Program / Project Title";
-CJLangEN.programProject="Program / Project Description";
+CJLangEN.programDesc="Program / Project Description";
 CJLangEN.costEstimate="Cost Estimate";
 
 CJLangEN.beginningDate="Beginning date";
