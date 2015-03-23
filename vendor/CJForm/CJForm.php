@@ -78,14 +78,16 @@ class CJForm{
 				$this->elem[]="<select name='{$id}_beginning_$j' id='{$id}_beginning_$j' class='CJField CJSelect CJFieldHours CJFieldHour1 $classRequired' >";
 				$this->elem[]="<option value=''>&nbsp;</option>";
 				for($i=8;$i<22;$i++){
-					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."00'></option>";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":30:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."30'></option>";
 				}
 				$this->elem[]="</select>";
 				$this->elem[]="<label class='CJLabel' data-label='heure2'>heure2</label>";
 				$this->elem[]="<select name='{$id}_ending_$j' id='{$id}_ending_$j' class='CJField CJSelect CJFieldHours CJFieldHour2 $classRequired' >";
 				$this->elem[]="<option value=''>&nbsp;</option>";
 				for($i=8;$i<22;$i++){
-					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."'></option>";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":00:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."00'></option>";
+					$this->elem[]="<option value='".sprintf("%02d",$i).":30:00' class='CJLabel' data-label='hour".sprintf("%02d",$i)."30'></option>";
 				}
 				$this->elem[]="</select>";
 				$this->elem[]="</div> <!-- CJDatesHours -->";
